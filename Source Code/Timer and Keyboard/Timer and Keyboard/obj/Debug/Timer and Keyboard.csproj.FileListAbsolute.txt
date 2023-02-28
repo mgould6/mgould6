@@ -1,0 +1,16 @@
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\bin\Debug\Timer and Keyboard.exe.config
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\bin\Debug\Timer and Keyboard.exe
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\bin\Debug\Timer and Keyboard.pdb
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.csproj.SuggestedBindingRedirects.cache
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\MainWindow.g.cs
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\App.g.cs
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard_MarkupCompile.cache
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard_MarkupCompile.lref
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\MainWindow.baml
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.g.resources
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer_and_Keyboard.Properties.Resources.resources
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.csproj.GenerateResource.cache
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.csproj.CoreCompileInputs.cache
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.exe
+C:\Users\mjgou\source\repos\Timer and Keyboard\Timer and Keyboard\obj\Debug\Timer and Keyboard.pdb

@@ -1,0 +1,16 @@
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\bin\Debug\BinaryCalculatorGame.exe.config
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\bin\Debug\BinaryCalculatorGame.exe
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\bin\Debug\BinaryCalculatorGame.pdb
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\MainWindow.g.cs
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\App.g.cs
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame_MarkupCompile.cache
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame_MarkupCompile.lref
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\MainWindow.baml
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.g.resources
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.Properties.Resources.resources
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.csproj.GenerateResource.cache
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.csproj.CoreCompileInputs.cache
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.exe
+C:\Users\mjgou\source\repos\BinaryCalculatorGame\BinaryCalculatorGame\obj\Debug\BinaryCalculatorGame.pdb

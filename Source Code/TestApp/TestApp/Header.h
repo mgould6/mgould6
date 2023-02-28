@@ -1,0 +1,15 @@
+#pragma once
+#include <iostream>
+#include <vector>
+#include <fstream> 
+#include <string>
+#include <functional>
+#include <algorithm>
+#include <numeric>
+#include <iterator>
+#include <functional>
+#include <iomanip>
+#include <stdlib.h>
+#include <cstdlib>
+#include <cmath>
+#include <cstdio>

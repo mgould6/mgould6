@@ -1,0 +1,15 @@
+﻿  DiagonalDifference.cpp
+  LonelyInteger.cpp
+C:\Users\mjgou\source\repos\TestApp\TestApp\LonelyInteger.cpp(32,19): error C3861: 'dupenv_s': identifier not found
+  PlusMinusRatios.cpp
+C:\Users\mjgou\source\repos\TestApp\TestApp\PlusMinusRatios.cpp(18,23): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'float', possible loss of data
+  StringStreamTimeCoverter.cpp
+C:\Users\mjgou\source\repos\TestApp\TestApp\StringStreamTimeCoverter.cpp(13,18): error C2079: 'istream' uses undefined class 'std::basic_stringstream<char,std::char_traits<char>,std::allocator<char>>'
+C:\Users\mjgou\source\repos\TestApp\TestApp\StringStreamTimeCoverter.cpp(14,18): error C2079: 'ostream' uses undefined class 'std::basic_stringstream<char,std::char_traits<char>,std::allocator<char>>'
+C:\Users\mjgou\source\repos\TestApp\TestApp\StringStreamTimeCoverter.cpp(16,13): error C2677: binary '<<': no global operator found which takes type 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' (or there is no acceptable conversion)
+C:\Users\mjgou\source\repos\TestApp\TestApp\StringStreamTimeCoverter.cpp(17,13): warning C4552: '>>': result of expression not used
+C:\Users\mjgou\source\repos\TestApp\TestApp\StringStreamTimeCoverter.cpp(28,13): error C2677: binary '<<': no global operator found which takes type 'std::_Fillobj<char>' (or there is no acceptable conversion)
+C:\Users\mjgou\source\repos\TestApp\TestApp\StringStreamTimeCoverter.cpp(35,19): error C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  VectorMiniMaxAccumulate.cpp
+  TestApp.cpp
+  Generating Code...

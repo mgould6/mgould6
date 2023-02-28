@@ -1,0 +1,16 @@
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\bin\Debug\AddandRemoveItems.exe.config
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\bin\Debug\AddandRemoveItems.exe
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\bin\Debug\AddandRemoveItems.pdb
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.csproj.SuggestedBindingRedirects.cache
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\MainWindow.g.cs
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\App.g.cs
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems_MarkupCompile.cache
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems_MarkupCompile.lref
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\MainWindow.baml
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.g.resources
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.Properties.Resources.resources
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.csproj.GenerateResource.cache
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.csproj.CoreCompileInputs.cache
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.exe
+C:\Users\mjgou\source\repos\AddandRemoveItems\AddandRemoveItems\obj\Debug\AddandRemoveItems.pdb

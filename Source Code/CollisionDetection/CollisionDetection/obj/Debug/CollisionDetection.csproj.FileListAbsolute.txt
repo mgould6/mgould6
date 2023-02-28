@@ -1,0 +1,16 @@
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.csproj.SuggestedBindingRedirects.cache
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\MainWindow.g.cs
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\App.g.cs
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection_MarkupCompile.cache
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection_MarkupCompile.lref
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\bin\Debug\CollisionDetection.exe.config
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\bin\Debug\CollisionDetection.exe
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\bin\Debug\CollisionDetection.pdb
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\MainWindow.baml
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.g.resources
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.Properties.Resources.resources
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.csproj.GenerateResource.cache
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.csproj.CoreCompileInputs.cache
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.exe
+C:\Users\mjgou\source\repos\CollisionDetection\CollisionDetection\obj\Debug\CollisionDetection.pdb

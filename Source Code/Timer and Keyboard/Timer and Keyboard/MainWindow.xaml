@@ -1,0 +1,15 @@
+﻿<Window x:Class="Timer_and_Keyboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Timer_and_Keyboard"
+        mc:Ignorable="d"
+        Title="keyboard movement with timer" Height="450" Width="800">
+    <Canvas Name="myCanvas" Background="LightBlue" Focusable="true" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
+
+        <Rectangle Name="player" Height="50" Width="50" Fill="Red" Canvas.Left="380" Canvas.Top="66"/>
+        <Rectangle Name="box" Height="50" Width="50" Fill="Purple" Canvas.Left="380" Canvas.Top="280"/>
+
+    </Canvas>
+</Window>
