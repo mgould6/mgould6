@@ -1,5 +1,7 @@
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+//------- Ignore this ----------
+#include<filesystem>
+namespace fs = std::filesystem;
+//------------------------------
 
 #include<iostream>
 #include<glad/glad.h>
@@ -46,7 +48,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
-	GLFWwindow* window = glfwCreateWindow(800, 800, "YoutubeOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 800, "OpenGL Project", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -100,10 +102,11 @@ int main()
 	* Also note that this requires C++17, so go to Project Properties, C/C++, Language, and select C++17
 	*/
 	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string texPath = "/Resources/YoutubeOpenGL 6 - Textures/";
+	std::string texPath = "./OpenGLProject/";
+
 
 	// Texture
-	Texture sample((parentDir + texPath + "sample.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture sample((parentDir + texPath + "sample.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
 	sample.texUnit(shaderProgram, "tex0", 0);
 
 	// Original code from the tutorial
