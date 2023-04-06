@@ -55,6 +55,7 @@ namespace ChessGame
         }
 
 
+
         private void DrawChessBoard()
         {
             int squareSize = tableLayoutPanel1.Width / BOARD_SIZE;
@@ -99,14 +100,12 @@ namespace ChessGame
                     {
                         _pictureBoxes[row, col].Image = chessPieceImage;
                         _pictureBoxes[row, col].SizeMode = PictureBoxSizeMode.CenterImage;
-                        _pictureBoxes[row, col].Location = new Point(
-                            _startingPositions[row, col].X + (PIECE_SIZE - chessPieceImage.Width) / 2,
-                            _startingPositions[row, col].Y + (PIECE_SIZE - chessPieceImage.Height) / 2
-                        );
+                        _pictureBoxes[row, col].Location = _startingPositions[row, col];
                     }
                 }
             }
         }
+
 
         private Image GetChessPieceImage(int row, int col)
         {
