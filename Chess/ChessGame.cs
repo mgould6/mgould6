@@ -60,26 +60,46 @@ namespace ChessGame
 
         private void DrawChessBoard()
         {
-            int squareSize = tableLayoutPanel1.Width / BOARD_SIZE;
+            if (tableLayoutPanel1.RowCount != BOARD_SIZE || tableLayoutPanel1.ColumnCount != BOARD_SIZE)
+            {
+                throw new InvalidOperationException("The table layout panel does not have the expected number of rows and columns.");
+            }
 
             for (int row = 0; row < BOARD_SIZE; row++)
             {
                 for (int col = 0; col < BOARD_SIZE; col++)
                 {
-                    // get existing picture box from array
-                    PictureBox pictureBox = _pictureBoxes[row, col];
-
-                    // set properties of picture box
+                    // Create a picture box
+                    PictureBox pictureBox = new PictureBox();
                     pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
-                    pictureBox.BackColor = GetCellColor(row, col);
-                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBox.BackColor = Color.Transparent; // set background color to transparent
 
-                    // attach OnMouseClick event to the picture box
+                    if (tableLayoutPanel1.GetControlFromPosition(col, row) != null)
+                    {
+                        // The picture box already exists in the table layout panel, so update its properties
+                        pictureBox = (PictureBox)tableLayoutPanel1.GetControlFromPosition(col, row);
+                        pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
+                        pictureBox.BackColor = GetCellColor(row, col);
+                    }
+                    else
+                    {
+                        // The picture box does not exist in the table layout panel, so add it and set its properties
+                        pictureBox.Location = new Point(col * PIECE_SIZE, row * PIECE_SIZE);
+                        pictureBox.BackColor = GetCellColor(row, col);
+                        pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBox.BackColor = Color.Transparent; // Set background color to transparent
+
+                        // Add picture box to table layout panel
+                        tableLayoutPanel1.Controls.Add(pictureBox, col, row);
+                    }
+
+                    _pictureBoxes[row, col] = pictureBox;
+
+                    // Attach OnMouseClick event to the picture box
                     pictureBox.MouseClick += PictureBox_OnMouseClick;
                 }
             }
         }
+
 
         private void DrawChessPieces()
         {
