@@ -57,6 +57,7 @@ namespace ChessGame
 
 
 
+
         private void DrawChessBoard()
         {
             using (Pen pen = new Pen(Color.Black, BORDER_SIZE))
