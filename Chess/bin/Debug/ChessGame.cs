@@ -60,32 +60,26 @@ namespace ChessGame
 
         private void DrawChessBoard()
         {
-            using (Pen pen = new Pen(Color.Black, BORDER_SIZE))
+            int squareSize = tableLayoutPanel1.Width / BOARD_SIZE;
+
+            for (int row = 0; row < BOARD_SIZE; row++)
             {
-                for (int row = 0; row < BOARD_SIZE; row++)
+                for (int col = 0; col < BOARD_SIZE; col++)
                 {
-                    for (int col = 0; col < BOARD_SIZE; col++)
-                    {
-                        // create a picture box
-                        PictureBox pictureBox = new PictureBox();
-                        pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
-                        pictureBox.Location = new Point(col * PIECE_SIZE, row * PIECE_SIZE);
-                        pictureBox.BackColor = GetCellColor(row, col);
-                        pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pictureBox.BackColor = Color.Transparent; // set background color to transparent
+                    // get existing picture box from array
+                    PictureBox pictureBox = _pictureBoxes[row, col];
 
-                        // add picture box to table layout panel
-                        tableLayoutPanel1.Controls.Add(pictureBox, col, row);
-                        _pictureBoxes[row, col] = pictureBox;
+                    // set properties of picture box
+                    pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
+                    pictureBox.BackColor = GetCellColor(row, col);
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pictureBox.BackColor = Color.Transparent; // set background color to transparent
 
-                        // attach OnMouseClick event to the picture box
-                        pictureBox.MouseClick += PictureBox_OnMouseClick;
-                    }
+                    // attach OnMouseClick event to the picture box
+                    pictureBox.MouseClick += PictureBox_OnMouseClick;
                 }
             }
-
         }
-
 
         private void DrawChessPieces()
         {
@@ -99,9 +93,17 @@ namespace ChessGame
                     // update image of picture box, if chess piece image is not null
                     if (chessPieceImage != null)
                     {
-                        _pictureBoxes[row, col].Image = chessPieceImage;
-                        _pictureBoxes[row, col].SizeMode = PictureBoxSizeMode.CenterImage;
-                        _pictureBoxes[row, col].Location = _startingPositions[row, col];
+                        // get existing picture box from array
+                        PictureBox pictureBox = _pictureBoxes[row, col];
+
+                        // set properties of picture box
+                        pictureBox.Image = chessPieceImage;
+                        pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                        // calculate location of picture box
+                        int x = col * PIECE_SIZE + BORDER_SIZE;
+                        int y = row * PIECE_SIZE + BORDER_SIZE;
+                        pictureBox.Location = new Point(x, y);
                     }
                 }
             }
