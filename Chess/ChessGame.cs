@@ -56,10 +56,9 @@ namespace ChessGame
 
 
 
+
         private void DrawChessBoard()
         {
-            int squareSize = tableLayoutPanel1.Width / BOARD_SIZE;
-
             using (Pen pen = new Pen(Color.Black, BORDER_SIZE))
             {
                 for (int row = 0; row < BOARD_SIZE; row++)
@@ -85,6 +84,7 @@ namespace ChessGame
             }
 
         }
+
 
         private void DrawChessPieces()
         {
