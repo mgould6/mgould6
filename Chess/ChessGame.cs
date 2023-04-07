@@ -78,7 +78,7 @@ namespace ChessGame
                         // The picture box already exists in the table layout panel, so update its properties
                         pictureBox = (PictureBox)tableLayoutPanel1.GetControlFromPosition(col, row);
                         pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
-                        pictureBox.BackColor = GetCellColor(row, col);
+                        pictureBox.BackColor = Color.Transparent;
                     }
                     else
                     {
@@ -113,21 +113,21 @@ namespace ChessGame
                     // update image of picture box, if chess piece image is not null
                     if (chessPieceImage != null)
                     {
-                        // get existing picture box from array
                         PictureBox pictureBox = _pictureBoxes[row, col];
-
-                        // set properties of picture box
                         pictureBox.Image = chessPieceImage;
                         pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                        pictureBox.BackColor = Color.Transparent;
+                        pictureBox.Anchor = AnchorStyles.None;
 
-                        // calculate location of picture box
-                        int x = col * PIECE_SIZE + BORDER_SIZE;
-                        int y = row * PIECE_SIZE + BORDER_SIZE;
+                        // center picture box within cell
+                        int x = (PIECE_SIZE - chessPieceImage.Width) / 2;
+                        int y = (PIECE_SIZE - chessPieceImage.Height) / 2;
                         pictureBox.Location = new Point(x, y);
                     }
                 }
             }
         }
+
 
 
         private Image GetChessPieceImage(int row, int col)
