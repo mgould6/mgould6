@@ -1,7 +1,6 @@
 ﻿using ChessGame;
 using System;
 using Chess;
-using .
 
 
 namespace Chess
