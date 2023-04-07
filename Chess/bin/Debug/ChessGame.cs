@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,6 +10,8 @@ namespace ChessGame
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
         private const int BORDER_SIZE = 2;
+        private ChessBoard _chessBoard;
+
 
         private PictureBox[,] _pictureBoxes;
         private Point[,] _startingPositions;
@@ -16,10 +19,33 @@ namespace ChessGame
         public ChessGame()
         {
             InitializeComponent();
+            _chessBoard = new ChessBoard();
+            this.MouseDown += new MouseEventHandler(OnBoardClick);
+
             Initialize();
         }
 
+        // Update the mouse click event handler to use the new classes
+        private void OnBoardClick(object sender, MouseEventArgs e)
+        {
+            int tileSize = 64; // Change this value according to your chessboard tile size
 
+            int clickedColumn = e.X / tileSize;
+            int clickedRow = e.Y / tileSize;
+
+            // Ensure the clicked position is within the chessboard
+            if (clickedColumn >= 0 && clickedColumn < 8 && clickedRow >= 0 && clickedRow < 8)
+            {
+                // Assuming you have a method to get the piece at the specified position
+                ChessPiece clickedPiece = _chessBoard.GetPieceAt(clickedColumn, clickedRow);
+                if (clickedPiece != null)
+                {
+                    // Perform the desired action with the clicked piece
+                    // e.g., select the piece, highlight valid moves, etc.
+                    Console.WriteLine("Piece Clicked");
+                }
+            }
+        }
 
         public void Initialize()
         {
@@ -253,11 +279,14 @@ namespace ChessGame
         private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
         {
             PictureBox pictureBox = sender as PictureBox;
-            int row = tableLayoutPanel1.GetRow(pictureBox);
-            int col = tableLayoutPanel1.GetColumn(pictureBox);
+            int clickedColumn = tableLayoutPanel1.GetRow(pictureBox);
+            int clickedRow = tableLayoutPanel1.GetColumn(pictureBox);
+            ChessPiece clickedPiece = _chessBoard.GetPieceAt(clickedColumn, clickedRow);
 
             // TODO: Handle the click event for the picture box at the clicked location
         }
+
+      
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

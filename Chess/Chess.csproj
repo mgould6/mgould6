@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessGame.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Form</SubType>
@@ -54,6 +55,14 @@
       <DependentUpon>ChessGame.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="ChessPieces\Bishop.cs" />
+    <Compile Include="ChessPieces\ChessPiece.cs" />
+    <Compile Include="ChessPieces\King.cs" />
+    <Compile Include="ChessPieces\Knight.cs" />
+    <Compile Include="ChessPieces\Pawn.cs" />
+    <Compile Include="ChessPieces\Queen.cs" />
+    <Compile Include="ChessPieces\Rook.cs" />
+    <Compile Include="ChessPieces\Move.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ChessGame.resx">
