@@ -38,12 +38,16 @@ namespace ChessGame
         public ChessGame()
         {
             InitializeComponent();
+
+
+
             chessBoard = new ChessBoard();
             this.MouseDown += new MouseEventHandler(OnBoardClick);
-
             Initialize();
+
         }
 
+        // Update the mouse click event handler to use the new classes
         // Update the mouse click event handler to use the new classes
         private void OnBoardClick(object sender, MouseEventArgs e)
         {
@@ -66,36 +70,71 @@ namespace ChessGame
             }
         }
 
+
         public void Initialize()
         {
+            // Create chess board
+
+            // Initialize _pictureBoxes array
             _pictureBoxes = new PictureBox[8, 8];
-            _startingPositions = new Point[BOARD_SIZE, BOARD_SIZE];
+
+            // Set square size based on size of PictureBox controls
+            squareSize = ClientSize.Width / 8;
 
             // Initialize starting positions
-            for (int row = 0; row < BOARD_SIZE; row++)
+            _startingPositions = new Point[8, 8];
+            for (int row = 0; row < 8; row++)
             {
-                for (int col = 0; col < BOARD_SIZE; col++)
+                for (int col = 0; col < 8; col++)
                 {
                     int adjustedRow = row;
                     int adjustedCol = col;
 
-                    if (row >= BOARD_SIZE / 2)
+                    if (row >= 4)
                     {
-                        adjustedRow = BOARD_SIZE - row - 1;
-                        adjustedCol = BOARD_SIZE - col - 1;
+                        adjustedRow = 7 - row;
+                        adjustedCol = 7 - col;
                     }
 
-                    _startingPositions[row, col] = new Point(adjustedCol * PIECE_SIZE, adjustedRow * PIECE_SIZE);
+                    _startingPositions[row, col] = new Point(adjustedCol * squareSize, adjustedRow * squareSize);
                 }
             }
 
             // Set padding of table layout panel to zero
             tableLayoutPanel1.Padding = new Padding(0);
 
-            // Draw chess board
-            DrawChessBoard();
+            // Add PictureBox controls to TableLayoutPanel
+            for (int row = 0; row < 8; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    // Create PictureBox control and set properties
+                    PictureBox pictureBox = new PictureBox();
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pictureBox.Width = squareSize;
+                    pictureBox.Height = squareSize;
+                    pictureBox.Tag = new BoardLocation(col, row);
 
-            squareSize = _pictureBoxes[0, 0].Width / 8;
+                    // Set background color based on square color
+                    if ((row + col) % 2 == 0)
+                    {
+                        pictureBox.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        pictureBox.BackColor = Color.LightGray;
+                    }
+
+                    // Add PictureBox control to TableLayoutPanel
+                    tableLayoutPanel1.Controls.Add(pictureBox, col, row);
+
+                    // Save reference to PictureBox in array
+                    _pictureBoxes[col, row] = pictureBox;
+
+                    // Add event handler for mouse clicks
+                    pictureBox.MouseClick += PictureBox_OnMouseClick;
+                }
+            }
 
             // Draw chess pieces
             DrawChessPieces();
@@ -103,6 +142,19 @@ namespace ChessGame
 
 
 
+
+
+        public struct BoardLocation
+        {
+            public int Column { get; }
+            public int Row { get; }
+
+            public BoardLocation(int column, int row)
+            {
+                Column = column;
+                Row = row;
+            }
+        }
 
 
         private void DrawChessBoard()
@@ -150,24 +202,25 @@ namespace ChessGame
 
         private void DrawChessPieces()
         {
-            for (int row = 0; row < 8; row++)
-    {
-        for (int col = 0; col < 8; col++)
-        {
-            ChessPiece piece = chessBoard.GetPieceAt(row, col);
-
-            if (piece != null)
+            for (int row = 0; row < BOARD_SIZE; row++)
             {
-                PictureBox pictureBox = _pictureBoxes[row, col];
-                pictureBox.Image = piece.Image;
-                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.BackColor = ((row + col) % 2 == 0) ? Color.FromArgb(255, 235, 205) : Color.FromArgb(181, 136, 99);
-                pictureBox.Location = new Point(col * squareSize, row * squareSize);
+                for (int col = 0; col < BOARD_SIZE; col++)
+                {
+                    ChessPiece piece = chessBoard.GetPieceAt(col, row);
+                    PictureBox pictureBox = _pictureBoxes[col, row];
+
+                    if (piece != null)
+                    {
+                        pictureBox.Image = piece.Image;
+                    }
+                    else
+                    {
+                        pictureBox.Image = null;
+                    }
+                }
             }
         }
-    }
 
-        }
 
 
 
