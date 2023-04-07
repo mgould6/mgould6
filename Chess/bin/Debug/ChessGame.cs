@@ -255,7 +255,6 @@ namespace ChessGame
             PictureBox pictureBox = sender as PictureBox;
             int row = tableLayoutPanel1.GetRow(pictureBox);
             int col = tableLayoutPanel1.GetColumn(pictureBox);
-            ChessLocation clickedLocation = new ChessLocation(row, col);
 
             // TODO: Handle the click event for the picture box at the clicked location
         }

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Chess;
-using Chess.Pieces;
-using Chess.Enums;
-
 
 namespace ChessGame
 {
@@ -16,17 +12,11 @@ namespace ChessGame
 
         private PictureBox[,] _pictureBoxes;
         private Point[,] _startingPositions;
-        private ChessPiece _selectedPiece;
-
-        private readonly ChessBoard _chessBoard = new ChessBoard();
-        private PlayerColor _currentPlayer;
 
         public ChessGame()
         {
-
             InitializeComponent();
             Initialize();
-
         }
 
 
@@ -140,10 +130,39 @@ namespace ChessGame
 
 
 
-        private Image GetChessPieceImage(PlayerColor color, PieceType type)
+        private Image GetChessPieceImage(int row, int col)
         {
-            string resourceName = $"{color}_{type}.png";
-            return Properties.Resources.ResourceManager.GetObject(resourceName) as Image;
+            string pieceName = GetPieceName(row, col);
+
+            switch (pieceName)
+            {
+                case "Rook":
+                    return Chess.Properties.Resources.Rook;
+                case "Knight":
+                    return Chess.Properties.Resources.Knight;
+                case "Bishop":
+                    return Chess.Properties.Resources.Bishop;
+                case "Queen":
+                    return Chess.Properties.Resources.Queen;
+                case "King":
+                    return Chess.Properties.Resources.King;
+                case "Pawn":
+                    return Chess.Properties.Resources.Pawn;
+                case "Pawn2":
+                    return Chess.Properties.Resources.Pawn2;
+                case "Rook2":
+                    return Chess.Properties.Resources.Rook2;
+                case "Knight2":
+                    return Chess.Properties.Resources.Knight2;
+                case "Bishop2":
+                    return Chess.Properties.Resources.Bishop2;
+                case "Queen2":
+                    return Chess.Properties.Resources.Queen2;
+                case "King2":
+                    return Chess.Properties.Resources.King2;
+                default:
+                    return null;
+            }
         }
 
 
@@ -198,71 +217,6 @@ namespace ChessGame
 
 
 
-        private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
-        {
-            PictureBox pictureBox = sender as PictureBox;
-            int row = tableLayoutPanel1.GetRow(pictureBox);
-            int col = tableLayoutPanel1.GetColumn(pictureBox);
-            ChessLocation clickedLocation = new ChessLocation(row, col);
-
-            if (_selectedPiece == null)
-            {
-                // No piece currently selected, so select the clicked piece if it exists
-                ChessPiece clickedPiece = _chessBoard.GetPieceAtLocation(clickedLocation);
-                if (clickedPiece != null && clickedPiece.Color == _currentPlayer)
-                {
-                    _selectedPiece = clickedPiece;
-                    _selectedPiece.Location = clickedLocation;
-                    HighlightValidMoves(_selectedPiece);
-                }
-            }
-            else
-            {
-                // A piece is currently selected, so move the piece if the clicked location is valid
-                if (_selectedPiece.IsValidMove(clickedLocation))
-                {
-                    _selectedPiece.Move(clickedLocation);
-                    _selectedPiece = null;
-                    RemoveHighlights();
-                    SwitchTurn();
-                }
-            }
-        }
-
-        private void UpdatePictureBoxes()
-        {
-            for (int row = 0; row < BOARD_SIZE; row++)
-            {
-                for (int col = 0; col < BOARD_SIZE; col++)
-                {
-                    // Get the piece at the current location
-                    ChessPiece piece = _chessBoard.GetPieceAtLocation(new ChessLocation(row, col));
-
-                    // Update the image of the picture box
-                    if (piece != null)
-                    {
-                        _pictureBoxes[row, col].Image = GetChessPieceImage(piece.Color, piece.Type);
-                    }
-                    else
-                    {
-                        _pictureBoxes[row, col].Image = null;
-                    }
-                }
-            }
-        }
-
-        private void EndGame(string message)
-        {
-            MessageBox.Show(message);
-            _chessBoard.ResetBoard();
-            UpdatePictureBoxes();
-            _currentPlayer = PlayerColor.White;
-        }
-
-        private void SwitchTurn()
-        {
-            _currentPlayer = _currentPlayer == PlayerColor.White ? PlayerColor.Black : PlayerColor.White;
-        }
 
 
 
@@ -296,7 +250,14 @@ namespace ChessGame
             }
         }
 
-        
+        private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
+        {
+            PictureBox pictureBox = sender as PictureBox;
+            int row = tableLayoutPanel1.GetRow(pictureBox);
+            int col = tableLayoutPanel1.GetColumn(pictureBox);
+
+            // TODO: Handle the click event for the picture box at the clicked location
+        }
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
