@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Chess;
+using Chess.Pieces;
+using Chess.Enums;
+
 
 namespace ChessGame
 {
@@ -136,39 +140,10 @@ namespace ChessGame
 
 
 
-        private Image GetChessPieceImage(int row, int col)
+        private Image GetChessPieceImage(PlayerColor color, PieceType type)
         {
-            string pieceName = GetPieceName(row, col);
-
-            switch (pieceName)
-            {
-                case "Rook":
-                    return Chess.Properties.Resources.Rook;
-                case "Knight":
-                    return Chess.Properties.Resources.Knight;
-                case "Bishop":
-                    return Chess.Properties.Resources.Bishop;
-                case "Queen":
-                    return Chess.Properties.Resources.Queen;
-                case "King":
-                    return Chess.Properties.Resources.King;
-                case "Pawn":
-                    return Chess.Properties.Resources.Pawn;
-                case "Pawn2":
-                    return Chess.Properties.Resources.Pawn2;
-                case "Rook2":
-                    return Chess.Properties.Resources.Rook2;
-                case "Knight2":
-                    return Chess.Properties.Resources.Knight2;
-                case "Bishop2":
-                    return Chess.Properties.Resources.Bishop2;
-                case "Queen2":
-                    return Chess.Properties.Resources.Queen2;
-                case "King2":
-                    return Chess.Properties.Resources.King2;
-                default:
-                    return null;
-            }
+            string resourceName = $"{color}_{type}.png";
+            return Properties.Resources.ResourceManager.GetObject(resourceName) as Image;
         }
 
 
@@ -281,12 +256,12 @@ namespace ChessGame
             MessageBox.Show(message);
             _chessBoard.ResetBoard();
             UpdatePictureBoxes();
-            _currentPlayer = ChessColor.White;
+            _currentPlayer = PlayerColor.White;
         }
 
         private void SwitchTurn()
         {
-            _currentPlayer = _currentPlayer == ChessColor.White ? ChessColor.Black : ChessColor.White;
+            _currentPlayer = _currentPlayer == PlayerColor.White ? PlayerColor.Black : PlayerColor.White;
         }
 
 

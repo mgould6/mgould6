@@ -1,6 +1,7 @@
 ﻿using ChessGame;
 using System;
 using Chess;
+using System.Collections.Generic;
 
 public enum PieceType
 {
@@ -12,24 +13,43 @@ public enum PieceType
     King
 }
 
-public enum PieceColor
+public enum PlayerColor
 {
     White,
     Black
 }
 
-public class ChessPiece
+public abstract class ChessPiece
 {
     public PieceType Type { get; set; }
-    public PieceColor Color { get; set; }
+    public PlayerColor Color { get; set; }
     public ChessLocation Location { get; set; }
+    public abstract List<ChessLocation> GetValidMoves();
 
-    public ChessPiece(PieceType type, PieceColor color, ChessLocation location)
+
+    public ChessPiece(PieceType type, PlayerColor color, ChessLocation location)
     {
         Type = type;
         Color = color;
         Location = location;
     }
+
+    public void HighlightValidMoves()
+    {
+        foreach (var move in GetValidMoves())
+        {
+            ChessBoard.HighlightTile(move.Row, move.Col);
+        }
+    }
+
+    public void RemoveHighlights()
+    {
+        foreach (var move in GetValidMoves())
+        {
+            ChessBoard.RemoveHighlight(move.Row, move.Col);
+        }
+    }
+
 
     public bool IsValidMove(ChessLocation destination)
     {
@@ -42,4 +62,6 @@ public class ChessPiece
         // TODO: Implement this method to move the piece to the destination location
         throw new NotImplementedException();
     }
+
+
 }
