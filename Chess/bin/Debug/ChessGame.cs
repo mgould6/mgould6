@@ -167,53 +167,53 @@ namespace ChessGame
 
 
         private string GetPieceName(int row, int col)
-{
-    switch (row)
-    {
-        case 0:
-            switch (col)
+        {
+            switch (row)
             {
                 case 0:
-                case 7:
-                    return "Rook2"; // black rook
+                    switch (col)
+                    {
+                        case 0:
+                        case 7:
+                            return "Rook2"; // black rook
+                        case 1:
+                        case 6:
+                            return "Knight2"; // black knight
+                        case 2:
+                        case 5:
+                            return "Bishop2"; // black bishop
+                        case 3:
+                            return "Queen2"; // black queen
+                        case 4:
+                            return "King2"; // black king
+                    }
+                    break;
                 case 1:
+                    return "Pawn2"; // black pawn
                 case 6:
-                    return "Knight2"; // black knight
-                case 2:
-                case 5:
-                    return "Bishop2"; // black bishop
-                case 3:
-                    return "Queen2"; // black queen
-                case 4:
-                    return "King2"; // black king
-            }
-            break;
-        case 1:
-            return "Pawn2"; // black pawn
-        case 6:
-            return "Pawn"; // white pawn
-        case 7:
-            switch (col)
-            {
-                case 0:
+                    return "Pawn"; // white pawn
                 case 7:
-                    return "Rook"; // white rook
-                case 1:
-                case 6:
-                    return "Knight"; // white knight
-                case 2:
-                case 5:
-                    return "Bishop"; // white bishop
-                case 3:
-                    return "Queen"; // white queen
-                case 4:
-                    return "King"; // white king
+                    switch (col)
+                    {
+                        case 0:
+                        case 7:
+                            return "Rook"; // white rook
+                        case 1:
+                        case 6:
+                            return "Knight"; // white knight
+                        case 2:
+                        case 5:
+                            return "Bishop"; // white bishop
+                        case 3:
+                            return "Queen"; // white queen
+                        case 4:
+                            return "King"; // white king
+                    }
+                    break;
             }
-            break;
-    }
 
-    return null;
-}
+            return null;
+        }
 
 
 
@@ -280,5 +280,4 @@ namespace ChessGame
         }
     }
 }
-
 

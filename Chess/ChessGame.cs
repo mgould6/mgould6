@@ -12,11 +12,17 @@ namespace ChessGame
 
         private PictureBox[,] _pictureBoxes;
         private Point[,] _startingPositions;
+        private ChessPiece _selectedPiece;
+
+        private readonly ChessBoard _chessBoard = new ChessBoard();
+        private PlayerColor _currentPlayer;
 
         public ChessGame()
         {
+
             InitializeComponent();
             Initialize();
+
         }
 
 
@@ -167,56 +173,121 @@ namespace ChessGame
 
 
         private string GetPieceName(int row, int col)
-{
-    switch (row)
-    {
-        case 0:
-            switch (col)
+        {
+            switch (row)
             {
                 case 0:
-                case 7:
-                    return "Rook2"; // black rook
+                    switch (col)
+                    {
+                        case 0:
+                        case 7:
+                            return "Rook2"; // black rook
+                        case 1:
+                        case 6:
+                            return "Knight2"; // black knight
+                        case 2:
+                        case 5:
+                            return "Bishop2"; // black bishop
+                        case 3:
+                            return "Queen2"; // black queen
+                        case 4:
+                            return "King2"; // black king
+                    }
+                    break;
                 case 1:
+                    return "Pawn2"; // black pawn
                 case 6:
-                    return "Knight2"; // black knight
-                case 2:
-                case 5:
-                    return "Bishop2"; // black bishop
-                case 3:
-                    return "Queen2"; // black queen
-                case 4:
-                    return "King2"; // black king
+                    return "Pawn"; // white pawn
+                case 7:
+                    switch (col)
+                    {
+                        case 0:
+                        case 7:
+                            return "Rook"; // white rook
+                        case 1:
+                        case 6:
+                            return "Knight"; // white knight
+                        case 2:
+                        case 5:
+                            return "Bishop"; // white bishop
+                        case 3:
+                            return "Queen"; // white queen
+                        case 4:
+                            return "King"; // white king
+                    }
+                    break;
             }
-            break;
-        case 1:
-            return "Pawn2"; // black pawn
-        case 6:
-            return "Pawn"; // white pawn
-        case 7:
-            switch (col)
+
+            return null;
+        }
+
+
+
+        private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
+        {
+            PictureBox pictureBox = sender as PictureBox;
+            int row = tableLayoutPanel1.GetRow(pictureBox);
+            int col = tableLayoutPanel1.GetColumn(pictureBox);
+            ChessLocation clickedLocation = new ChessLocation(row, col);
+
+            if (_selectedPiece == null)
             {
-                case 0:
-                case 7:
-                    return "Rook"; // white rook
-                case 1:
-                case 6:
-                    return "Knight"; // white knight
-                case 2:
-                case 5:
-                    return "Bishop"; // white bishop
-                case 3:
-                    return "Queen"; // white queen
-                case 4:
-                    return "King"; // white king
+                // No piece currently selected, so select the clicked piece if it exists
+                ChessPiece clickedPiece = _chessBoard.GetPieceAtLocation(clickedLocation);
+                if (clickedPiece != null && clickedPiece.Color == _currentPlayer)
+                {
+                    _selectedPiece = clickedPiece;
+                    _selectedPiece.Location = clickedLocation;
+                    HighlightValidMoves(_selectedPiece);
+                }
             }
-            break;
-    }
+            else
+            {
+                // A piece is currently selected, so move the piece if the clicked location is valid
+                if (_selectedPiece.IsValidMove(clickedLocation))
+                {
+                    _selectedPiece.Move(clickedLocation);
+                    _selectedPiece = null;
+                    RemoveHighlights();
+                    SwitchTurn();
+                }
+            }
+        }
 
-    return null;
-}
+        private void UpdatePictureBoxes()
+        {
+            for (int row = 0; row < BOARD_SIZE; row++)
+            {
+                for (int col = 0; col < BOARD_SIZE; col++)
+                {
+                    // Get the piece at the current location
+                    ChessPiece piece = _chessBoard.GetPieceAtLocation(new ChessLocation(row, col));
 
+                    // Update the image of the picture box
+                    if (piece != null)
+                    {
+                        _pictureBoxes[row, col].Image = GetChessPieceImage(piece.Color, piece.Type);
+                    }
+                    else
+                    {
+                        _pictureBoxes[row, col].Image = null;
+                    }
+                }
+            }
+        }
 
+        private void EndGame(string message)
+        {
+            MessageBox.Show(message);
+            _chessBoard.ResetBoard();
+            UpdatePictureBoxes();
+            _currentPlayer = ChessColor.White;
+        }
 
+        private void SwitchTurn()
+        {
+            _currentPlayer = _currentPlayer == ChessColor.White ? ChessColor.Black : ChessColor.White;
+        }
 
 
 
@@ -250,15 +321,7 @@ namespace ChessGame
             }
         }
 
-        private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
-        {
-            PictureBox pictureBox = sender as PictureBox;
-            int row = tableLayoutPanel1.GetRow(pictureBox);
-            int col = tableLayoutPanel1.GetColumn(pictureBox);
-            ChessLocation clickedLocation = new ChessLocation(row, col);
-
-            // TODO: Handle the click event for the picture box at the clicked location
-        }
+        
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -280,5 +343,4 @@ namespace ChessGame
         }
     }
 }
-
 
