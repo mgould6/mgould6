@@ -1,49 +1,62 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using Chess;
+using Chess.Properties;
 
-public class Pawn : ChessPiece
+
+
+namespace ChessGame
 {
-    public Pawn(int column, int row, bool isWhite) : base(column, row, isWhite)
+    public class Pawn : ChessPiece
     {
-    }
 
-    public override List<Move> GetValidMoves(ChessBoard board)
-    {
-        List<Move> validMoves = new List<Move>();
 
-        // Calculate the direction the pawn can move based on its color
-        int direction = IsWhite ? -1 : 1;
-
-        // Check if the pawn can move one square forward
-        ChessPiece forwardPiece = board.GetPieceAt(Column, Row + direction);
-        if (forwardPiece == null)
+        public Pawn(int column, int row, bool isWhite) : base(column, row, isWhite)
         {
-            validMoves.Add(new Move(this, Column, Row, Column, Row + direction));
+        }
 
-            // Check if the pawn can move two squares forward (only from its starting position)
-            if ((IsWhite && Row == 6) || (!IsWhite && Row == 1))
+        public override List<Move> GetValidMoves(ChessBoard board)
+        {
+            List<Move> validMoves = new List<Move>();
+
+            // Calculate the direction the pawn can move based on its color
+            int direction = IsWhite ? -1 : 1;
+
+            // Check if the pawn can move one square forward
+            ChessPiece forwardPiece = board.GetPieceAt(Column, Row + direction);
+            if (forwardPiece == null)
             {
-                ChessPiece forwardTwoPiece = board.GetPieceAt(Column, Row + (direction * 2));
-                if (forwardTwoPiece == null)
+                validMoves.Add(new Move(this, Column, Row, Column, Row + direction));
+
+                // Check if the pawn can move two squares forward (only from its starting position)
+                if ((IsWhite && Row == 6) || (!IsWhite && Row == 1))
                 {
-                    validMoves.Add(new Move(this, Column, Row, Column, Row + (direction * 2)));
+                    ChessPiece forwardTwoPiece = board.GetPieceAt(Column, Row + (direction * 2));
+                    if (forwardTwoPiece == null)
+                    {
+                        validMoves.Add(new Move(this, Column, Row, Column, Row + (direction * 2)));
+                    }
                 }
             }
-        }
 
-        // Check if the pawn can capture diagonally (left and right)
-        for (int i = -1; i <= 1; i += 2)
-        {
-            ChessPiece diagonalPiece = board.GetPieceAt(Column + i, Row + direction);
-            if (diagonalPiece != null && diagonalPiece.IsWhite != IsWhite)
+            // Check if the pawn can capture diagonally (left and right)
+            for (int i = -1; i <= 1; i += 2)
             {
-                validMoves.Add(new Move(this, Column, Row, Column + i, Row + direction));
+                ChessPiece diagonalPiece = board.GetPieceAt(Column + i, Row + direction);
+                if (diagonalPiece != null && diagonalPiece.IsWhite != IsWhite)
+                {
+                    validMoves.Add(new Move(this, Column, Row, Column + i, Row + direction));
+                }
             }
+
+            // Add en passant logic here if desired
+
+            return validMoves;
+        }
+        public override Image Image
+        {
+            get { return ImageProvider.GetImageForPiece(this); }
         }
 
-        // Add en passant logic here if desired
-
-        return validMoves;
     }
-
 }

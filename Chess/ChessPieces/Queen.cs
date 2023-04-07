@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Chess;
+using Chess.Properties;
+using System.Drawing;
 
 public class Queen : ChessPiece
 {
@@ -44,5 +46,9 @@ public class Queen : ChessPiece
                 break;
             }
         }
+    }
+    public override Image Image
+    {
+        get { return ImageProvider.GetImageForPiece(this); }
     }
 }

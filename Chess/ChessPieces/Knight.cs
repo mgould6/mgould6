@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Chess;
+using System.Drawing;
+using Chess.Properties;
 
 public class Knight : ChessPiece
 {
@@ -32,6 +34,10 @@ public class Knight : ChessPiece
         }
 
         return validMoves;
+    }
+    public override Image Image
+    {
+        get { return ImageProvider.GetImageForPiece(this); }
     }
 
 }

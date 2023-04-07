@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Chess;
-
+using Chess.Properties;
+using System.Drawing;
 public class Bishop : ChessPiece
 {
     public Bishop(int column, int row, bool isWhite) : base(column, row, isWhite)
@@ -39,6 +40,10 @@ public class Bishop : ChessPiece
         }
 
         return validMoves;
+    }
+    public override Image Image
+    {
+        get { return ImageProvider.GetImageForPiece(this); }
     }
 
 }

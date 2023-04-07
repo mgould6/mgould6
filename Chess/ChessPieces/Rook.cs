@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Chess;
+using Chess.Properties;
+using System.Drawing;
 
 public class Rook : ChessPiece
 {
@@ -37,6 +39,10 @@ public class Rook : ChessPiece
         // Repeat the same logic for vertical moves (changing dRow instead of dColumn)
 
         return validMoves;
+    }
+    public override Image Image
+    {
+        get { return ImageProvider.GetImageForPiece(this); }
     }
 
 }

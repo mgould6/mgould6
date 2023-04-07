@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="ChessPieces\Bishop.cs" />
     <Compile Include="ChessPieces\ChessPiece.cs" />
+    <Compile Include="ChessPieces\ImageProvider.cs" />
     <Compile Include="ChessPieces\King.cs" />
     <Compile Include="ChessPieces\Knight.cs" />
     <Compile Include="ChessPieces\Pawn.cs" />

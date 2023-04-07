@@ -2,17 +2,34 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using Chess;
+using Chess.Properties;
+
+
+
+
 
 namespace ChessGame
 {
+    public enum ChessPlayer
+    {
+        None,
+        White,
+        Black
+    }
+
     public partial class ChessGame : Form
     {
+        
+
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
         private const int BORDER_SIZE = 2;
         private ChessBoard chessBoard;
         private int squareSize;
+        private ChessPlayer currentPlayer = ChessPlayer.White;
 
 
         private PictureBox[,] _pictureBoxes;
@@ -133,29 +150,23 @@ namespace ChessGame
 
         private void DrawChessPieces()
         {
-            for (int row = 0; row < BOARD_SIZE; row++)
+            for (int row = 0; row < 8; row++)
+    {
+        for (int col = 0; col < 8; col++)
+        {
+            ChessPiece piece = chessBoard.GetPieceAt(row, col);
+
+            if (piece != null)
             {
-                for (int col = 0; col < BOARD_SIZE; col++)
-                {
-                    // get image for chess piece
-                    Image chessPieceImage = GetChessPieceImage(row, col);
-
-                    // update image of picture box, if chess piece image is not null
-                    if (chessPieceImage != null)
-                    {
-                        PictureBox pictureBox = _pictureBoxes[row, col];
-                        pictureBox.Image = chessPieceImage;
-                        pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                        pictureBox.BackColor = Color.Transparent;
-                        pictureBox.Anchor = AnchorStyles.None;
-
-                        // center picture box within cell
-                        int x = (PIECE_SIZE - chessPieceImage.Width) / 2;
-                        int y = (PIECE_SIZE - chessPieceImage.Height) / 2;
-                        pictureBox.Location = new Point(x, y);
-                    }
-                }
+                PictureBox pictureBox = _pictureBoxes[row, col];
+                pictureBox.Image = piece.Image;
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.BackColor = ((row + col) % 2 == 0) ? Color.FromArgb(255, 235, 205) : Color.FromArgb(181, 136, 99);
+                pictureBox.Location = new Point(col * squareSize, row * squareSize);
             }
+        }
+    }
+
         }
 
 
@@ -283,27 +294,80 @@ namespace ChessGame
         private ChessPiece selectedPiece = null;
         private List<Move> validMoves = new List<Move>();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+
+
         private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
         {
+            // Get the clicked row and column
             int clickedColumn = e.X / squareSize;
             int clickedRow = e.Y / squareSize;
 
+            // Get the chess piece at the clicked location
+            ChessPiece clickedPiece = chessBoard.GetPieceAt(clickedRow, clickedColumn);
+
             if (selectedPiece == null)
             {
-                // Select a piece if one exists at the clicked location
-                selectedPiece = chessBoard.GetPieceAt(clickedColumn, clickedRow);
-                if (selectedPiece != null)
+                // If no piece is selected, select the clicked piece if it belongs to the current player
+                if (clickedPiece != null && clickedPiece.Player == currentPlayer)
                 {
+                    // Set the selected piece and get its valid moves
+                    selectedPiece = clickedPiece;
                     validMoves = selectedPiece.GetValidMoves(chessBoard);
-                    // ... (to be continued with highlighting valid moves)
+
+                    // Highlight the clicked square
+                    _pictureBoxes[clickedRow, clickedColumn].BackColor = Color.LightBlue;
+
+                    // Highlight valid destination squares
+                    foreach (Move move in validMoves)
+                    {
+                        _pictureBoxes[move.ToRow, move.ToColumn].BackColor = Color.LightGreen;
+                    }
                 }
             }
             else
             {
-                // ... (to be continued with handling moves to the destination square)
+                // Get the clicked destination square
+                int destinationColumn = e.X / squareSize;
+                int destinationRow = e.Y / squareSize;
+
+                // Check if the clicked square is a valid destination
+                Move validMove = validMoves.FirstOrDefault(move => move.ToRow == destinationRow && move.ToColumn == destinationColumn);
+
+                if (validMove != null)
+                {
+                    // Move the piece on the chessboard
+                    chessBoard.MovePiece(selectedPiece, destinationRow, destinationColumn);
+
+                    // Toggle the current player's turn
+                    currentPlayer = (currentPlayer == ChessPlayer.White) ? ChessPlayer.Black : ChessPlayer.White;
+
+                    // Reset selectedPiece and validMoves
+                    selectedPiece = null;
+                    validMoves = null;
+
+                    // Redraw the chessboard
+                    DrawChessBoard();
+                    DrawChessPieces();
+                }
+                else
+                {
+                    // Deselect the selected piece and clear the highlighted squares
+                    _pictureBoxes[clickedRow, clickedColumn].BackColor = ((clickedRow + clickedColumn) % 2 == 0) ? Color.FromArgb(255, 235, 205) : Color.FromArgb(181, 136, 99);
+                    foreach (Move move in validMoves)
+                    {
+                        _pictureBoxes[move.ToRow, move.ToColumn].BackColor = ((move.ToRow + move.ToColumn) % 2 == 0) ? Color.FromArgb(255, 235, 205) : Color.FromArgb(181, 136, 99);
+                    }
+                    selectedPiece = null;
+                    validMoves = null;
+                }
             }
         }
-
 
 
 
