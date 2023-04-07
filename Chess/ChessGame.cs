@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,7 +11,8 @@ namespace ChessGame
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
         private const int BORDER_SIZE = 2;
-        private ChessBoard _chessBoard;
+        private ChessBoard chessBoard;
+        private int squareSize;
 
 
         private PictureBox[,] _pictureBoxes;
@@ -19,7 +21,7 @@ namespace ChessGame
         public ChessGame()
         {
             InitializeComponent();
-            _chessBoard = new ChessBoard();
+            chessBoard = new ChessBoard();
             this.MouseDown += new MouseEventHandler(OnBoardClick);
 
             Initialize();
@@ -37,7 +39,7 @@ namespace ChessGame
             if (clickedColumn >= 0 && clickedColumn < 8 && clickedRow >= 0 && clickedRow < 8)
             {
                 // Assuming you have a method to get the piece at the specified position
-                ChessPiece clickedPiece = _chessBoard.GetPieceAt(clickedColumn, clickedRow);
+                ChessPiece clickedPiece = chessBoard.GetPieceAt(clickedColumn, clickedRow);
                 if (clickedPiece != null)
                 {
                     // Perform the desired action with the clicked piece
@@ -49,7 +51,7 @@ namespace ChessGame
 
         public void Initialize()
         {
-            _pictureBoxes = new PictureBox[BOARD_SIZE, BOARD_SIZE];
+            _pictureBoxes = new PictureBox[8, 8];
             _startingPositions = new Point[BOARD_SIZE, BOARD_SIZE];
 
             // Initialize starting positions
@@ -75,6 +77,8 @@ namespace ChessGame
 
             // Draw chess board
             DrawChessBoard();
+
+            squareSize = _pictureBoxes[0, 0].Width / 8;
 
             // Draw chess pieces
             DrawChessPieces();
@@ -276,17 +280,33 @@ namespace ChessGame
             }
         }
 
+        private ChessPiece selectedPiece = null;
+        private List<Move> validMoves = new List<Move>();
+
         private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = sender as PictureBox;
-            int clickedColumn = tableLayoutPanel1.GetRow(pictureBox);
-            int clickedRow = tableLayoutPanel1.GetColumn(pictureBox);
-            ChessPiece clickedPiece = _chessBoard.GetPieceAt(clickedColumn, clickedRow);
+            int clickedColumn = e.X / squareSize;
+            int clickedRow = e.Y / squareSize;
 
-            // TODO: Handle the click event for the picture box at the clicked location
+            if (selectedPiece == null)
+            {
+                // Select a piece if one exists at the clicked location
+                selectedPiece = chessBoard.GetPieceAt(clickedColumn, clickedRow);
+                if (selectedPiece != null)
+                {
+                    validMoves = selectedPiece.GetValidMoves(chessBoard);
+                    // ... (to be continued with highlighting valid moves)
+                }
+            }
+            else
+            {
+                // ... (to be continued with handling moves to the destination square)
+            }
         }
 
-      
+
+
+
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
