@@ -22,7 +22,8 @@ namespace ChessGame
 
     public partial class ChessGame : Form
     {
-        
+
+        private PictureBox[,] chessPieces;
 
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
@@ -38,13 +39,11 @@ namespace ChessGame
         public ChessGame()
         {
             InitializeComponent();
-
-
-
             chessBoard = new ChessBoard();
             this.MouseDown += new MouseEventHandler(OnBoardClick);
-            Initialize();
-
+            InitializeChessBoard();
+            DrawChessBoard();
+            DrawChessPieces();
         }
 
         // Update the mouse click event handler to use the new classes
@@ -71,76 +70,37 @@ namespace ChessGame
         }
 
 
-        public void Initialize()
+        public void InitializeChessBoard()
         {
-            // Create chess board
+            int size = Math.Min(tableLayoutPanel1.Width, tableLayoutPanel1.Height) / BOARD_SIZE;
+            _pictureBoxes = new PictureBox[BOARD_SIZE, BOARD_SIZE];
+            _startingPositions = new Point[BOARD_SIZE, BOARD_SIZE];
 
-            // Initialize _pictureBoxes array
-            _pictureBoxes = new PictureBox[8, 8];
-
-            // Set square size based on size of PictureBox controls
-            squareSize = ClientSize.Width / 8;
-
-            // Initialize starting positions
-            _startingPositions = new Point[8, 8];
-            for (int row = 0; row < 8; row++)
+            for (int row = 0; row < BOARD_SIZE; row++)
             {
-                for (int col = 0; col < 8; col++)
+                for (int col = 0; col < BOARD_SIZE; col++)
                 {
-                    int adjustedRow = row;
-                    int adjustedCol = col;
-
-                    if (row >= 4)
-                    {
-                        adjustedRow = 7 - row;
-                        adjustedCol = 7 - col;
-                    }
-
-                    _startingPositions[row, col] = new Point(adjustedCol * squareSize, adjustedRow * squareSize);
-                }
-            }
-
-            // Set padding of table layout panel to zero
-            tableLayoutPanel1.Padding = new Padding(0);
-
-            // Add PictureBox controls to TableLayoutPanel
-            for (int row = 0; row < 8; row++)
-            {
-                for (int col = 0; col < 8; col++)
-                {
-                    // Create PictureBox control and set properties
+                    // Create a picture box
                     PictureBox pictureBox = new PictureBox();
+                    pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
+                    pictureBox.Location = new Point(col * PIECE_SIZE, row * PIECE_SIZE);
+                    pictureBox.BackColor = GetCellColor(row, col);
                     pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBox.Width = squareSize;
-                    pictureBox.Height = squareSize;
-                    pictureBox.Tag = new BoardLocation(col, row);
+                    pictureBox.BackColor = Color.Transparent; // Set background color to transparent
 
-                    // Set background color based on square color
-                    if ((row + col) % 2 == 0)
-                    {
-                        pictureBox.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        pictureBox.BackColor = Color.LightGray;
-                    }
-
-                    // Add PictureBox control to TableLayoutPanel
+                    // Add picture box to table layout panel
                     tableLayoutPanel1.Controls.Add(pictureBox, col, row);
 
-                    // Save reference to PictureBox in array
-                    _pictureBoxes[col, row] = pictureBox;
+                    _pictureBoxes[row, col] = pictureBox;
+                    _startingPositions[row, col] = pictureBox.Location;
 
-                    // Add event handler for mouse clicks
+                    // Attach OnMouseClick event to the picture box
                     pictureBox.MouseClick += PictureBox_OnMouseClick;
                 }
             }
-
-            // Draw chessboard and chess pieces
-            DrawChessBoard();
-            DrawChessPieces();
-
         }
+
+
 
 
 
@@ -266,11 +226,15 @@ namespace ChessGame
             }
         }
 
-
-
-
         private string GetPieceName(int row, int col)
         {
+            ChessPiece piece = chessBoard.GetPieceAt(col, row);
+
+            if (piece == null)
+            {
+                return null;
+            }
+
             switch (row)
             {
                 case 0:
@@ -317,6 +281,7 @@ namespace ChessGame
 
             return null;
         }
+
 
 
 
