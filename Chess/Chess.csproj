@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessGame.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Form</SubType>
@@ -55,15 +54,6 @@
       <DependentUpon>ChessGame.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="ChessPieces\Bishop.cs" />
-    <Compile Include="ChessPieces\ChessPiece.cs" />
-    <Compile Include="ChessPieces\ImageProvider.cs" />
-    <Compile Include="ChessPieces\King.cs" />
-    <Compile Include="ChessPieces\Knight.cs" />
-    <Compile Include="ChessPieces\Pawn.cs" />
-    <Compile Include="ChessPieces\Queen.cs" />
-    <Compile Include="ChessPieces\Rook.cs" />
-    <Compile Include="ChessPieces\Move.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ChessGame.resx">
@@ -94,54 +84,54 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Bishop.png">
+    <Resource Include="Bishop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="King.png">
+    </Resource>
+    <Resource Include="King.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Knight.png">
+    </Resource>
+    <Resource Include="Knight.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pawn.png">
+    </Resource>
+    <Resource Include="Pawn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Queen.png">
+    </Resource>
+    <Resource Include="Queen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Rook.png">
+    </Resource>
+    <Resource Include="Rook.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Bishop2.png">
+    <Resource Include="Bishop2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="King2.png">
+    <Resource Include="King2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Knight2.png">
+    <Resource Include="Knight2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pawn2.png">
+    <Resource Include="Pawn2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Queen2.png">
+    <Resource Include="Queen2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rook2.png">
+    <Resource Include="Rook2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

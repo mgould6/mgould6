@@ -17,7 +17,7 @@ namespace ChessGame
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ChessGame chessGame = new ChessGame();
-            chessGame.InitializeChessBoard(); // call the initialize method here
+            chessGame.Initialize(); // call the initialize method here
             Application.Run(chessGame);
         }
     }

@@ -1,37 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using Chess;
-using Chess.Properties;
-
-
-
-
 
 namespace ChessGame
 {
-    public enum ChessPlayer
-    {
-        None,
-        White,
-        Black
-    }
-
     public partial class ChessGame : Form
     {
-
-        private PictureBox[,] chessPieces;
-
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
         private const int BORDER_SIZE = 2;
-        private ChessBoard chessBoard;
-        private int squareSize;
-        private ChessPlayer currentPlayer = ChessPlayer.White;
-
 
         private PictureBox[,] _pictureBoxes;
         private Point[,] _startingPositions;
@@ -39,85 +16,46 @@ namespace ChessGame
         public ChessGame()
         {
             InitializeComponent();
-            chessBoard = new ChessBoard();
-            this.MouseDown += new MouseEventHandler(OnBoardClick);
-            InitializeChessBoard();
-            DrawChessBoard();
-            DrawChessPieces();
-        }
-
-        // Update the mouse click event handler to use the new classes
-        // Update the mouse click event handler to use the new classes
-        private void OnBoardClick(object sender, MouseEventArgs e)
-        {
-            int tileSize = 64; // Change this value according to your chessboard tile size
-
-            int clickedColumn = e.X / tileSize;
-            int clickedRow = e.Y / tileSize;
-
-            // Ensure the clicked position is within the chessboard
-            if (clickedColumn >= 0 && clickedColumn < 8 && clickedRow >= 0 && clickedRow < 8)
-            {
-                // Assuming you have a method to get the piece at the specified position
-                ChessPiece clickedPiece = chessBoard.GetPieceAt(clickedColumn, clickedRow);
-                if (clickedPiece != null)
-                {
-                    // Perform the desired action with the clicked piece
-                    // e.g., select the piece, highlight valid moves, etc.
-                    Console.WriteLine("Piece Clicked");
-                }
-            }
+            Initialize();
         }
 
 
-        public void InitializeChessBoard()
+
+        public void Initialize()
         {
-            int size = Math.Min(tableLayoutPanel1.Width, tableLayoutPanel1.Height) / BOARD_SIZE;
             _pictureBoxes = new PictureBox[BOARD_SIZE, BOARD_SIZE];
             _startingPositions = new Point[BOARD_SIZE, BOARD_SIZE];
 
+            // Initialize starting positions
             for (int row = 0; row < BOARD_SIZE; row++)
             {
                 for (int col = 0; col < BOARD_SIZE; col++)
                 {
-                    // Create a picture box
-                    PictureBox pictureBox = new PictureBox();
-                    pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
-                    pictureBox.Location = new Point(col * PIECE_SIZE, row * PIECE_SIZE);
-                    pictureBox.BackColor = GetCellColor(row, col);
-                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pictureBox.BackColor = Color.Transparent; // Set background color to transparent
+                    int adjustedRow = row;
+                    int adjustedCol = col;
 
-                    // Add picture box to table layout panel
-                    tableLayoutPanel1.Controls.Add(pictureBox, col, row);
+                    if (row >= BOARD_SIZE / 2)
+                    {
+                        adjustedRow = BOARD_SIZE - row - 1;
+                        adjustedCol = BOARD_SIZE - col - 1;
+                    }
 
-                    _pictureBoxes[row, col] = pictureBox;
-                    _startingPositions[row, col] = pictureBox.Location;
-
-                    // Attach OnMouseClick event to the picture box
-                    pictureBox.MouseClick += PictureBox_OnMouseClick;
+                    _startingPositions[row, col] = new Point(adjustedCol * PIECE_SIZE, adjustedRow * PIECE_SIZE);
                 }
             }
+
+            // Set padding of table layout panel to zero
+            tableLayoutPanel1.Padding = new Padding(0);
+
+            // Draw chess board
+            DrawChessBoard();
+
+            // Draw chess pieces
+            DrawChessPieces();
         }
 
 
 
-
-
-
-
-
-        public struct BoardLocation
-        {
-            public int Column { get; }
-            public int Row { get; }
-
-            public BoardLocation(int column, int row)
-            {
-                Column = column;
-                Row = row;
-            }
-        }
 
 
         private void DrawChessBoard()
@@ -169,25 +107,26 @@ namespace ChessGame
             {
                 for (int col = 0; col < BOARD_SIZE; col++)
                 {
-                    ChessPiece piece = chessBoard.GetPieceAt(col, row);
-                    PictureBox pictureBox = _pictureBoxes[col, row];
+                    // get image for chess piece
+                    Image chessPieceImage = GetChessPieceImage(row, col);
 
-                    if (piece != null)
+                    // update image of picture box, if chess piece image is not null
+                    if (chessPieceImage != null)
                     {
-                        pictureBox.Image = GetChessPieceImage(row, col); // Get the image for the current piece
-                    }
-                    else
-                    {
-                        pictureBox.Image = null;
+                        PictureBox pictureBox = _pictureBoxes[row, col];
+                        pictureBox.Image = chessPieceImage;
+                        pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                        pictureBox.BackColor = Color.Transparent;
+                        pictureBox.Anchor = AnchorStyles.None;
+
+                        // center picture box within cell
+                        int x = (PIECE_SIZE - chessPieceImage.Width) / 2;
+                        int y = (PIECE_SIZE - chessPieceImage.Height) / 2;
+                        pictureBox.Location = new Point(x, y);
                     }
                 }
             }
         }
-
-
-
-
-
 
 
 
@@ -226,15 +165,9 @@ namespace ChessGame
             }
         }
 
+
         private string GetPieceName(int row, int col)
         {
-            ChessPiece piece = chessBoard.GetPieceAt(col, row);
-
-            if (piece == null)
-            {
-                return null;
-            }
-
             switch (row)
             {
                 case 0:
@@ -287,7 +220,6 @@ namespace ChessGame
 
 
 
-
         private Color GetCellColor(int row, int col)
         {
             if ((row + col) % 2 == 0)
@@ -318,86 +250,14 @@ namespace ChessGame
             }
         }
 
-        private ChessPiece selectedPiece = null;
-        private List<Move> validMoves = new List<Move>();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-
-
         private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
         {
-            // Get the clicked row and column
-            int clickedColumn = e.X / squareSize;
-            int clickedRow = e.Y / squareSize;
+            PictureBox pictureBox = sender as PictureBox;
+            int row = tableLayoutPanel1.GetRow(pictureBox);
+            int col = tableLayoutPanel1.GetColumn(pictureBox);
 
-            // Get the chess piece at the clicked location
-            ChessPiece clickedPiece = chessBoard.GetPieceAt(clickedRow, clickedColumn);
-
-            if (selectedPiece == null)
-            {
-                // If no piece is selected, select the clicked piece if it belongs to the current player
-                if (clickedPiece != null && clickedPiece.Player == currentPlayer)
-                {
-                    // Set the selected piece and get its valid moves
-                    selectedPiece = clickedPiece;
-                    validMoves = selectedPiece.GetValidMoves(chessBoard);
-
-                    // Highlight the clicked square
-                    _pictureBoxes[clickedRow, clickedColumn].BackColor = Color.LightBlue;
-
-                    // Highlight valid destination squares
-                    foreach (Move move in validMoves)
-                    {
-                        _pictureBoxes[move.ToRow, move.ToColumn].BackColor = Color.LightGreen;
-                    }
-                }
-            }
-            else
-            {
-                // Get the clicked destination square
-                int destinationColumn = e.X / squareSize;
-                int destinationRow = e.Y / squareSize;
-
-                // Check if the clicked square is a valid destination
-                Move validMove = validMoves.FirstOrDefault(move => move.ToRow == destinationRow && move.ToColumn == destinationColumn);
-
-                if (validMove != null)
-                {
-                    // Move the piece on the chessboard
-                    chessBoard.MovePiece(selectedPiece, destinationRow, destinationColumn);
-
-                    // Toggle the current player's turn
-                    currentPlayer = (currentPlayer == ChessPlayer.White) ? ChessPlayer.Black : ChessPlayer.White;
-
-                    // Reset selectedPiece and validMoves
-                    selectedPiece = null;
-                    validMoves = null;
-
-                    // Redraw the chessboard
-                    DrawChessBoard();
-                    DrawChessPieces();
-                }
-                else
-                {
-                    // Deselect the selected piece and clear the highlighted squares
-                    _pictureBoxes[clickedRow, clickedColumn].BackColor = ((clickedRow + clickedColumn) % 2 == 0) ? Color.FromArgb(255, 235, 205) : Color.FromArgb(181, 136, 99);
-                    foreach (Move move in validMoves)
-                    {
-                        _pictureBoxes[move.ToRow, move.ToColumn].BackColor = ((move.ToRow + move.ToColumn) % 2 == 0) ? Color.FromArgb(255, 235, 205) : Color.FromArgb(181, 136, 99);
-                    }
-                    selectedPiece = null;
-                    validMoves = null;
-                }
-            }
+            // TODO: Handle the click event for the picture box at the clicked location
         }
-
-
-
 
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
