@@ -136,9 +136,12 @@ namespace ChessGame
                 }
             }
 
-            // Draw chess pieces
+            // Draw chessboard and chess pieces
+            DrawChessBoard();
             DrawChessPieces();
+
         }
+
 
 
 
@@ -211,7 +214,7 @@ namespace ChessGame
 
                     if (piece != null)
                     {
-                        pictureBox.Image = piece.Image;
+                        pictureBox.Image = GetChessPieceImage(row, col); // Get the image for the current piece
                     }
                     else
                     {
@@ -220,6 +223,10 @@ namespace ChessGame
                 }
             }
         }
+
+
+
+
 
 
 
@@ -258,6 +265,8 @@ namespace ChessGame
                     return null;
             }
         }
+
+
 
 
         private string GetPieceName(int row, int col)

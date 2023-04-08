@@ -5,7 +5,6 @@ C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.csproj.CoreCompileInputs.cache
 C:\Users\mjgou\source\repos\Chess\bin\Debug\Chess.exe.config
 C:\Users\mjgou\source\repos\Chess\bin\Debug\Chess.exe
 C:\Users\mjgou\source\repos\Chess\bin\Debug\Chess.pdb
-C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.g.resources
 C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.exe
 C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.pdb
 C:\Users\mjgou\source\repos\Chess\obj\Debug\ChessGame.ChessGame.resources
@@ -13,3 +12,15 @@ C:\Users\mjgou\source\repos\Chess\bin\Debug\ChessGame.resx
 C:\Users\mjgou\source\repos\Chess\bin\Debug\ChessGame.cs
 C:\Users\mjgou\source\repos\Chess\bin\Debug\ChessGame.Designer.cs
 C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.Properties.Resources.resources
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Bishop.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\King.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Knight.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Pawn.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Queen.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Rook.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Bishop2.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\King2.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Knight2.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Pawn2.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Queen2.png
+C:\Users\mjgou\source\repos\Chess\bin\Debug\Rook2.png
