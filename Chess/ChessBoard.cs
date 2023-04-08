@@ -1,4 +1,7 @@
-﻿public class ChessBoard
+﻿using System.Collections.Generic;
+using Chess;
+
+public class ChessBoard
 {
     private ChessPiece[,] _board;
 
