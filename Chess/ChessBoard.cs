@@ -1,71 +1,33 @@
-﻿using ChessGame;
-using System;
+﻿using System.Collections.Generic;
 using Chess;
 
-
-namespace Chess
+public class ChessBoard
 {
-    public class ChessBoard
+    private ChessPiece[,] _board;
+
+    public ChessBoard()
     {
-        private const int BOARD_SIZE = 8;
-        private ChessPiece[,] _pieces;
-
-        public ChessBoard()
-        {
-            _pieces = new ChessPiece[BOARD_SIZE, BOARD_SIZE];
-        }
-
-        public void AddPiece(ChessPiece piece, int row, int col)
-        {
-            if (IsValidPosition(row, col))
-            {
-                _pieces[row, col] = piece;
-                piece.ChessBoard = this;
-                piece.Location = new ChessLocation(row, col);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid position");
-            }
-        }
-
-        public void RemovePiece(int row, int col)
-        {
-            if (IsValidPosition(row, col))
-            {
-                _pieces[row, col] = null;
-            }
-            else
-            {
-                throw new ArgumentException("Invalid position");
-            }
-        }
-
-        public ChessPiece GetPieceAtLocation(ChessLocation location)
-        {
-            if (IsValidPosition(location.Row, location.Col))
-            {
-                return _pieces[location.Row, location.Col];
-            }
-            else
-            {
-                throw new ArgumentException("Invalid position");
-            }
-        }
-
-        private bool IsValidPosition(int row, int col)
-        {
-            return row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE;
-        }
-
-        public static void HighlightTile(int row, int col)
-        {
-            // TODO: Implement tile highlighting
-        }
-
-        public static void RemoveHighlight(int row, int col)
-        {
-            // TODO: Implement tile highlighting removal
-        }
+        _board = new ChessPiece[8, 8];
+        // Initialize the board with the starting positions of the chess pieces
     }
+
+    public ChessPiece GetPieceAt(int column, int row)
+    {
+        // Check if the given position is within the chessboard boundaries
+        if (column >= 0 && column < 8 && row >= 0 && row < 8)
+        {
+            // Return the chess piece at the specified position
+            return _board[column, row];
+        }
+
+        // Return null if the position is out of bounds
+        return null;
+    }
+
+    public void MovePiece(ChessPiece piece, int targetColumn, int targetRow)
+    {
+        // Move the chess piece to the target position and update the board
+    }
+
+    // Add any other necessary methods for managing the chessboard state
 }
