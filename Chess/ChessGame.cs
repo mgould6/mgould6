@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,13 +14,114 @@ namespace ChessGame
         private PictureBox[,] _pictureBoxes;
         private Point[,] _startingPositions;
 
+        private PieceColor currentPlayerColor = PieceColor.White;
+        private Board board;
+        private PieceColor currentPlayer;
+        private Piece selectedPiece;
+        private Position selectedPiecePosition;
+
+      
+
         public ChessGame()
         {
             InitializeComponent();
             Initialize();
+            InitializeGameState();
+
         }
 
+        private void InitializeGameState()
+        {
+            board = new Board();
+            board.InitializeBoard();
+            currentPlayer = PieceColor.White;
+            selectedPiece = null;
+            selectedPiecePosition = null;
+            UpdateUI();
+        }
 
+        private void NextTurn()
+        {
+            currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
+        }
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            Position position = (Position)button.Tag;
+
+            if (selectedPiece == null)
+            {
+                // Select the piece if it belongs to the current player
+                Piece clickedPiece = board.GetPiece(position.X, position.Y);
+                if (clickedPiece != null && clickedPiece.Color == currentPlayer)
+                {
+                    selectedPiece = clickedPiece;
+                    selectedPiecePosition = position;
+                    button.BackColor = Color.Yellow; // Highlight the selected piece
+                }
+            }
+            else
+            {
+                // Try to move the selected piece to the clicked cell
+                if (selectedPiece.IsValidMove(selectedPiecePosition, position, board))
+                {
+                    // Perform the move and update the game state
+                    board.MovePiece(selectedPiecePosition, position);
+                    selectedPiece = null;
+                    selectedPiecePosition = null;
+                    SwitchPlayer();
+                    UpdateUI();
+                }
+                else
+                {
+                    // Deselect the piece
+                    selectedPiece = null;
+                    selectedPiecePosition = null;
+                    UpdateUI(); // Remove any highlights or error messages
+                }
+            }
+        }
+        private void SwitchPlayer()
+        {
+            currentPlayer = (currentPlayer == PieceColor.White) ? PieceColor.Black : PieceColor.White;
+        }
+        private void UpdateUI()
+        {
+            // Clear any highlights or error messages
+            ClearHighlights();
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Button button = tableLayoutPanel1.GetControlFromPosition(j, i) as Button;
+                    Position position = new Position(j, i);
+                    Piece piece = board.GetPiece(position.X, position.Y);
+
+                    if (piece != null)
+                    {
+                        // Set the button text to display the piece
+                        button.Text = piece.ToString();
+                    }
+                    else
+                    {
+                        button.Text = string.Empty;
+                    }
+                }
+            }
+        }
+        private void ClearHighlights()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Button button = tableLayoutPanel1.GetControlFromPosition(j, i) as Button;
+                    button.BackColor = (i + j) % 2 == 0 ? Color.White : Color.Gray;
+                }
+            }
+        }
 
         public void Initialize()
         {
@@ -53,11 +155,6 @@ namespace ChessGame
             // Draw chess pieces
             DrawChessPieces();
         }
-
-
-
-
-
         private void DrawChessBoard()
         {
             if (tableLayoutPanel1.RowCount != BOARD_SIZE || tableLayoutPanel1.ColumnCount != BOARD_SIZE)
@@ -99,8 +196,6 @@ namespace ChessGame
                 }
             }
         }
-
-
         private void DrawChessPieces()
         {
             for (int row = 0; row < BOARD_SIZE; row++)
@@ -127,9 +222,6 @@ namespace ChessGame
                 }
             }
         }
-
-
-
         private Image GetChessPieceImage(int row, int col)
         {
             string pieceName = GetPieceName(row, col);
@@ -164,8 +256,6 @@ namespace ChessGame
                     return null;
             }
         }
-
-
         private string GetPieceName(int row, int col)
         {
             switch (row)
@@ -214,12 +304,6 @@ namespace ChessGame
 
             return null;
         }
-
-
-
-
-
-
         private Color GetCellColor(int row, int col)
         {
             if ((row + col) % 2 == 0)
@@ -249,7 +333,6 @@ namespace ChessGame
                 }
             }
         }
-
         private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
         {
             PictureBox pictureBox = sender as PictureBox;
@@ -258,8 +341,6 @@ namespace ChessGame
 
             // TODO: Handle the click event for the picture box at the clicked location
         }
-
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
             int cellSize = tableLayoutPanel1.Width / BOARD_SIZE;
