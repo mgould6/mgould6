@@ -101,16 +101,28 @@ namespace ChessGame
 
                     if (piece != null)
                     {
-                        // Set the button text to display the piece
-                        button.Text = piece.ToString();
+                        // Set the button image to display the piece
+                        button.Image = GetChessPieceImage(piece);
+                        button.Text = string.Empty;
                     }
                     else
                     {
+                        button.Image = null;
                         button.Text = string.Empty;
                     }
                 }
             }
         }
+
+        private Image GetChessPieceImage(Piece piece)
+        {
+            string pieceType = piece.GetType().Name;
+            string imageName = pieceType + (piece.Color == PieceColor.White ? "_White" : "_Black");
+
+            return (Image)Chess.Properties.Resources.ResourceManager.GetObject(imageName);
+        }
+
+
         private void ClearHighlights()
         {
             for (int i = 0; i < 8; i++)
@@ -152,9 +164,8 @@ namespace ChessGame
             // Draw chess board
             DrawChessBoard();
 
-            // Draw chess pieces
-            DrawChessPieces();
         }
+
         private void DrawChessBoard()
         {
             if (tableLayoutPanel1.RowCount != BOARD_SIZE || tableLayoutPanel1.ColumnCount != BOARD_SIZE)
@@ -166,59 +177,21 @@ namespace ChessGame
             {
                 for (int col = 0; col < BOARD_SIZE; col++)
                 {
-                    // Create a picture box
-                    PictureBox pictureBox = new PictureBox();
-                    pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
+                    Button button = new Button();
+                    button.Size = new Size(PIECE_SIZE, PIECE_SIZE);
+                    button.Tag = new Position(col, row);
+                    button.Click += Button_Click;
 
-                    if (tableLayoutPanel1.GetControlFromPosition(col, row) != null)
+                    if ((row + col) % 2 == 0)
                     {
-                        // The picture box already exists in the table layout panel, so update its properties
-                        pictureBox = (PictureBox)tableLayoutPanel1.GetControlFromPosition(col, row);
-                        pictureBox.Size = new Size(PIECE_SIZE, PIECE_SIZE);
-                        pictureBox.BackColor = Color.Transparent;
+                        button.BackColor = Color.White;
                     }
                     else
                     {
-                        // The picture box does not exist in the table layout panel, so add it and set its properties
-                        pictureBox.Location = new Point(col * PIECE_SIZE, row * PIECE_SIZE);
-                        pictureBox.BackColor = GetCellColor(row, col);
-                        pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pictureBox.BackColor = Color.Transparent; // Set background color to transparent
-
-                        // Add picture box to table layout panel
-                        tableLayoutPanel1.Controls.Add(pictureBox, col, row);
+                        button.BackColor = Color.Gray;
                     }
 
-                    _pictureBoxes[row, col] = pictureBox;
-
-                    // Attach OnMouseClick event to the picture box
-                    pictureBox.MouseClick += PictureBox_OnMouseClick;
-                }
-            }
-        }
-        private void DrawChessPieces()
-        {
-            for (int row = 0; row < BOARD_SIZE; row++)
-            {
-                for (int col = 0; col < BOARD_SIZE; col++)
-                {
-                    // get image for chess piece
-                    Image chessPieceImage = GetChessPieceImage(row, col);
-
-                    // update image of picture box, if chess piece image is not null
-                    if (chessPieceImage != null)
-                    {
-                        PictureBox pictureBox = _pictureBoxes[row, col];
-                        pictureBox.Image = chessPieceImage;
-                        pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                        pictureBox.BackColor = Color.Transparent;
-                        pictureBox.Anchor = AnchorStyles.None;
-
-                        // center picture box within cell
-                        int x = (PIECE_SIZE - chessPieceImage.Width) / 2;
-                        int y = (PIECE_SIZE - chessPieceImage.Height) / 2;
-                        pictureBox.Location = new Point(x, y);
-                    }
+                    tableLayoutPanel1.Controls.Add(button, col, row);
                 }
             }
         }
