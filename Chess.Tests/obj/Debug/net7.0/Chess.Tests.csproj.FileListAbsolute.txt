@@ -1,0 +1,5 @@
+C:\Users\mjgou\source\repos\Chess.Tests\obj\Debug\net7.0\Chess.Tests.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\Chess.Tests\obj\Debug\net7.0\Chess.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mjgou\source\repos\Chess.Tests\obj\Debug\net7.0\Chess.Tests.AssemblyInfoInputs.cache
+C:\Users\mjgou\source\repos\Chess.Tests\obj\Debug\net7.0\Chess.Tests.AssemblyInfo.cs
+C:\Users\mjgou\source\repos\Chess.Tests\obj\Debug\net7.0\Chess.Tests.csproj.CoreCompileInputs.cache
