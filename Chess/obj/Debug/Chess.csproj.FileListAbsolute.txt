@@ -13,4 +13,3 @@ C:\Users\mjgou\source\repos\Chess\bin\Debug\ChessGame.resx
 C:\Users\mjgou\source\repos\Chess\bin\Debug\ChessGame.cs
 C:\Users\mjgou\source\repos\Chess\bin\Debug\ChessGame.Designer.cs
 C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.Properties.Resources.resources
-C:\Users\mjgou\source\repos\Chess\obj\Debug\Chess.ChessGame.resources

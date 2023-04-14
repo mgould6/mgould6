@@ -1,6 +1,5 @@
 ﻿using Chess;
-using System;
-
+using Xunit;
 
 namespace Chess.Tests
 {
@@ -21,5 +20,7 @@ namespace Chess.Tests
             // Assert
             Assert.True(isValidMove);
         }
+
+        // Add more test methods for other pawn movement scenarios
     }
 }
