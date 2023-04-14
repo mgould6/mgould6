@@ -1,4 +1,6 @@
 ﻿using System;
+using Chess;
+
 
 namespace Chess
 {
@@ -14,12 +16,44 @@ namespace Chess
 
         public void InitializeBoard()
         {
-            // Add code to initialize the board with the chess pieces.
-            // For example:
-            // Pieces[0, 0] = new Rook(PieceColor.White);
-            // Pieces[0, 1] = new Knight(PieceColor.White);
-            // ...
+            // Initialize the board with empty spaces
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Pieces[i, j] = null;
+                }
+            }
+
+            // Set up white pieces
+            for (int i = 0; i < 8; i++)
+            {
+                Pieces[i, 1] = new Pawn(PieceColor.White);
+            }
+            Pieces[0, 0] = new Rook(PieceColor.White);
+            Pieces[7, 0] = new Rook(PieceColor.White);
+            Pieces[1, 0] = new Knight(PieceColor.White);
+            Pieces[6, 0] = new Knight(PieceColor.White);
+            Pieces[2, 0] = new Bishop(PieceColor.White);
+            Pieces[5, 0] = new Bishop(PieceColor.White);
+            Pieces[3, 0] = new Queen(PieceColor.White);
+            Pieces[4, 0] = new King(PieceColor.White);
+
+            // Set up black pieces
+            for (int i = 0; i < 8; i++)
+            {
+                Pieces[i, 6] = new Pawn(PieceColor.Black);
+            }
+            Pieces[0, 7] = new Rook(PieceColor.Black);
+            Pieces[7, 7] = new Rook(PieceColor.Black);
+            Pieces[1, 7] = new Knight(PieceColor.Black);
+            Pieces[6, 7] = new Knight(PieceColor.Black);
+            Pieces[2, 7] = new Bishop(PieceColor.Black);
+            Pieces[5, 7] = new Bishop(PieceColor.Black);
+            Pieces[3, 7] = new Queen(PieceColor.Black);
+            Pieces[4, 7] = new King(PieceColor.Black);
         }
+
 
         public Piece GetPiece(int x, int y)
         {
