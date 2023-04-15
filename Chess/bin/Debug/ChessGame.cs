@@ -9,8 +9,10 @@ namespace ChessGame
     {
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
+        private readonly Color lightSquareColor = Color.White;
+        private readonly Color darkSquareColor = Color.Gray;
+        private readonly Color defaultButtonColor = Color.Transparent;
 
-        private Point[,] _startingPositions;
 
         private PieceColor currentPlayerColor = PieceColor.White;
         private Board board;
@@ -40,41 +42,55 @@ namespace ChessGame
         }
         private void UpdateUI()
         {
-            // Clear any highlights or error messages
-            ClearHighlights();
-
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     Button button = tableLayoutPanel1.GetControlFromPosition(j, i) as Button;
-                    Position position = new Position(j, i);
-                    Piece piece = board.GetPiece(position.X, position.Y);
+                    Piece piece = board.GetPiece(j, i);
 
                     if (piece != null)
                     {
-                        // Set the button image to display the piece
-                        button.BackgroundImage = GetChessPieceImage(piece);
-                        button.BackgroundImageLayout = ImageLayout.Center; // Change from Stretch to Center
-                        button.Text = string.Empty;
+                        button.BackgroundImage = piece.GetImage();
                     }
                     else
                     {
                         button.BackgroundImage = null;
-                        button.Text = string.Empty;
+                    }
+
+                    // Set button background color
+                    button.BackColor = (i + j) % 2 == 0 ? lightSquareColor : darkSquareColor;
+
+                    // Highlight the selected piece
+                    if (selectedPiecePosition != null && selectedPiecePosition.X == j && selectedPiecePosition.Y == i)
+                    {
+                        button.BackColor = Color.Yellow;
                     }
                 }
             }
         }
 
+
         private void NextTurn()
         {
             currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
         }
+        private void ClearSelection()
+        {
+            if (selectedPiecePosition != null)
+            {
+                tableLayoutPanel1.GetControlFromPosition(selectedPiecePosition.X, selectedPiecePosition.Y).BackColor = defaultButtonColor;
+            }
+            selectedPiece = null;
+            selectedPiecePosition = null;
+        }
+
         private void Button_Click(object sender, EventArgs e)
         {
-           Button button = sender as Button;
+            Button button = sender as Button;
             Position position = (Position)button.Tag;
+
+            ClearSelection();
 
             if (selectedPiece == null)
             {
@@ -84,7 +100,7 @@ namespace ChessGame
                 {
                     selectedPiece = clickedPiece;
                     selectedPiecePosition = position;
-                    button.BackColor = Color.Yellow; // Highlight the selected piece
+                    UpdateUI(); // Highlight the selected piece
                 }
             }
             else
@@ -97,15 +113,14 @@ namespace ChessGame
                     selectedPiece = null;
                     selectedPiecePosition = null;
                     SwitchPlayer();
-                    UpdateUI();
                 }
                 else
                 {
                     // Deselect the piece
                     selectedPiece = null;
                     selectedPiecePosition = null;
-                    UpdateUI(); // Remove any highlights or error messages
                 }
+                UpdateUI(); // Refresh the UI
             }
         }
 
