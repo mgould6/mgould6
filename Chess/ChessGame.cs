@@ -44,7 +44,6 @@ namespace ChessGame
         {
             currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
         }
-
         private void Button_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -82,6 +81,7 @@ namespace ChessGame
                 }
             }
         }
+
         private void SwitchPlayer()
         {
             currentPlayer = (currentPlayer == PieceColor.White) ? PieceColor.Black : PieceColor.White;
@@ -102,8 +102,10 @@ namespace ChessGame
                     if (piece != null)
                     {
                         // Set the button image to display the piece
-                        button.Image = GetChessPieceImage(piece);
+                        button.BackgroundImage = GetChessPieceImage(piece);
+                        button.BackgroundImageLayout = ImageLayout.Center; // Change from Stretch to Center
                         button.Text = string.Empty;
+                        button.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); // Add this line to remove the border
                     }
                     else
                     {
@@ -137,26 +139,7 @@ namespace ChessGame
 
         public void Initialize()
         {
-            _pictureBoxes = new PictureBox[BOARD_SIZE, BOARD_SIZE];
-            _startingPositions = new Point[BOARD_SIZE, BOARD_SIZE];
-
-            // Initialize starting positions
-            for (int row = 0; row < BOARD_SIZE; row++)
-            {
-                for (int col = 0; col < BOARD_SIZE; col++)
-                {
-                    int adjustedRow = row;
-                    int adjustedCol = col;
-
-                    if (row >= BOARD_SIZE / 2)
-                    {
-                        adjustedRow = BOARD_SIZE - row - 1;
-                        adjustedCol = BOARD_SIZE - col - 1;
-                    }
-
-                    _startingPositions[row, col] = new Point(adjustedCol * PIECE_SIZE, adjustedRow * PIECE_SIZE);
-                }
-            }
+            
 
             // Set padding of table layout panel to zero
             tableLayoutPanel1.Padding = new Padding(0);
@@ -185,135 +168,24 @@ namespace ChessGame
                     if ((row + col) % 2 == 0)
                     {
                         button.BackColor = Color.White;
+                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatAppearance.BorderSize = 0;
+
                     }
                     else
                     {
                         button.BackColor = Color.Gray;
+                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatAppearance.BorderSize = 0;
+
                     }
+                    button.BackgroundImageLayout = ImageLayout.Center; // Add this line to center the images
 
                     tableLayoutPanel1.Controls.Add(button, col, row);
                 }
             }
         }
-        private Image GetChessPieceImage(int row, int col)
-        {
-            string pieceName = GetPieceName(row, col);
 
-            switch (pieceName)
-            {
-                case "Rook":
-                    return Chess.Properties.Resources.Rook;
-                case "Knight":
-                    return Chess.Properties.Resources.Knight;
-                case "Bishop":
-                    return Chess.Properties.Resources.Bishop;
-                case "Queen":
-                    return Chess.Properties.Resources.Queen;
-                case "King":
-                    return Chess.Properties.Resources.King;
-                case "Pawn":
-                    return Chess.Properties.Resources.Pawn;
-                case "Pawn2":
-                    return Chess.Properties.Resources.Pawn2;
-                case "Rook2":
-                    return Chess.Properties.Resources.Rook2;
-                case "Knight2":
-                    return Chess.Properties.Resources.Knight2;
-                case "Bishop2":
-                    return Chess.Properties.Resources.Bishop2;
-                case "Queen2":
-                    return Chess.Properties.Resources.Queen2;
-                case "King2":
-                    return Chess.Properties.Resources.King2;
-                default:
-                    return null;
-            }
-        }
-        private string GetPieceName(int row, int col)
-        {
-            switch (row)
-            {
-                case 0:
-                    switch (col)
-                    {
-                        case 0:
-                        case 7:
-                            return "Rook2"; // black rook
-                        case 1:
-                        case 6:
-                            return "Knight2"; // black knight
-                        case 2:
-                        case 5:
-                            return "Bishop2"; // black bishop
-                        case 3:
-                            return "Queen2"; // black queen
-                        case 4:
-                            return "King2"; // black king
-                    }
-                    break;
-                case 1:
-                    return "Pawn2"; // black pawn
-                case 6:
-                    return "Pawn"; // white pawn
-                case 7:
-                    switch (col)
-                    {
-                        case 0:
-                        case 7:
-                            return "Rook"; // white rook
-                        case 1:
-                        case 6:
-                            return "Knight"; // white knight
-                        case 2:
-                        case 5:
-                            return "Bishop"; // white bishop
-                        case 3:
-                            return "Queen"; // white queen
-                        case 4:
-                            return "King"; // white king
-                    }
-                    break;
-            }
-
-            return null;
-        }
-        private Color GetCellColor(int row, int col)
-        {
-            if ((row + col) % 2 == 0)
-            {
-                return Color.White;
-            }
-            else
-            {
-                // Check if the current cell contains a black or white piece based on its starting position
-                if (row == 0 || row == 1 || row == 6 || row == 7)
-                {
-                    if (col % 2 == 0)
-                    {
-                        // Cell contains a black piece
-                        return Color.LightGray;
-                    }
-                    else
-                    {
-                        // Cell contains a white piece
-                        return Color.White;
-                    }
-                }
-                else
-                {
-                    // Cell is empty
-                    return Color.LightGray;
-                }
-            }
-        }
-        private void PictureBox_OnMouseClick(object sender, MouseEventArgs e)
-        {
-            PictureBox pictureBox = sender as PictureBox;
-            int row = tableLayoutPanel1.GetRow(pictureBox);
-            int col = tableLayoutPanel1.GetColumn(pictureBox);
-
-            // TODO: Handle the click event for the picture box at the clicked location
-        }
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
             int cellSize = tableLayoutPanel1.Width / BOARD_SIZE;
