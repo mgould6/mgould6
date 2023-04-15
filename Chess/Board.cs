@@ -7,7 +7,7 @@ namespace Chess
     public class Board
     {
         public const int BOARD_SIZE = 8;
-        private Piece[,] Pieces;
+        private readonly Piece[,] Pieces;
 
         public Board()
         {
@@ -25,7 +25,7 @@ namespace Chess
                 }
             }
 
-            // Set up white pieces
+            // Set up black pieces
             for (int i = 0; i < 8; i++)
             {
                 Pieces[i, 1] = new Pawn(PieceColor.White);
@@ -39,7 +39,7 @@ namespace Chess
             Pieces[3, 0] = new Queen(PieceColor.White);
             Pieces[4, 0] = new King(PieceColor.White);
 
-            // Set up black pieces
+            // Set up white pieces
             for (int i = 0; i < 8; i++)
             {
                 Pieces[i, 6] = new Pawn(PieceColor.Black);

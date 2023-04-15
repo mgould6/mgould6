@@ -9,26 +9,22 @@ namespace ChessGame
     {
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
-        private const int BORDER_SIZE = 2;
 
-        private PictureBox[,] _pictureBoxes;
-        private Point[,] _startingPositions;
-
-        private PieceColor currentPlayerColor = PieceColor.White;
         private Board board;
         private PieceColor currentPlayer;
         private Piece selectedPiece;
         private Position selectedPiecePosition;
 
-      
+
 
         public ChessGame()
         {
             InitializeComponent();
             Initialize();
             InitializeGameState();
-
+            UpdateUI(); 
         }
+
 
         private void InitializeGameState()
         {
@@ -40,11 +36,7 @@ namespace ChessGame
             UpdateUI();
         }
 
-        private void NextTurn()
-        {
-            currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
-        }
-
+      
         private void Button_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -82,6 +74,7 @@ namespace ChessGame
                 }
             }
         }
+
         private void SwitchPlayer()
         {
             currentPlayer = (currentPlayer == PieceColor.White) ? PieceColor.Black : PieceColor.White;
@@ -102,19 +95,21 @@ namespace ChessGame
                     if (piece != null)
                     {
                         // Set the button image to display the piece
-                        button.Image = GetChessPieceImage(piece);
+                        button.BackgroundImage = GetChessPieceImage(piece);
+                        button.BackgroundImageLayout = ImageLayout.Center; // Change from Stretch to Center
                         button.Text = string.Empty;
+                        button.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); // Add this line to remove the border
                     }
                     else
                     {
-                        button.Image = null;
+                        button.BackgroundImage = null;
                         button.Text = string.Empty;
                     }
                 }
             }
         }
 
-        private Image GetChessPieceImage(Piece piece)
+        public Image GetChessPieceImage(Piece piece)
         {
             string pieceType = piece.GetType().Name;
             string imageName = pieceType + (piece.Color == PieceColor.White ? "_White" : "_Black");
@@ -166,17 +161,25 @@ namespace ChessGame
                     if ((row + col) % 2 == 0)
                     {
                         button.BackColor = Color.White;
+                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatAppearance.BorderSize = 0;
+
                     }
                     else
                     {
                         button.BackColor = Color.Gray;
+                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatAppearance.BorderSize = 0;
+
                     }
+                    button.BackgroundImageLayout = ImageLayout.Center; // Add this line to center the images
 
                     tableLayoutPanel1.Controls.Add(button, col, row);
                 }
             }
         }
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+
+        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
             int cellSize = tableLayoutPanel1.Width / BOARD_SIZE;
 
@@ -192,7 +195,10 @@ namespace ChessGame
                     }
                 }
             }
+            
         }
+
+        
     }
 }
 

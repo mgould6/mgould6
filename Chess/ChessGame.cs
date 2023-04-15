@@ -9,9 +9,7 @@ namespace ChessGame
     {
         private const int BOARD_SIZE = 8;
         private const int PIECE_SIZE = 64;
-        private const int BORDER_SIZE = 2;
 
-        private PictureBox[,] _pictureBoxes;
         private Point[,] _startingPositions;
 
         private PieceColor currentPlayerColor = PieceColor.White;
@@ -20,15 +18,16 @@ namespace ChessGame
         private Piece selectedPiece;
         private Position selectedPiecePosition;
 
-      
+
 
         public ChessGame()
         {
             InitializeComponent();
             Initialize();
             InitializeGameState();
-
+            UpdateUI(); 
         }
+
 
         private void InitializeGameState()
         {
@@ -39,6 +38,34 @@ namespace ChessGame
             selectedPiecePosition = null;
             UpdateUI();
         }
+        private void UpdateUI()
+        {
+            // Clear any highlights or error messages
+            ClearHighlights();
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Button button = tableLayoutPanel1.GetControlFromPosition(j, i) as Button;
+                    Position position = new Position(j, i);
+                    Piece piece = board.GetPiece(position.X, position.Y);
+
+                    if (piece != null)
+                    {
+                        // Set the button image to display the piece
+                        button.BackgroundImage = GetChessPieceImage(piece);
+                        button.BackgroundImageLayout = ImageLayout.Center; // Change from Stretch to Center
+                        button.Text = string.Empty;
+                    }
+                    else
+                    {
+                        button.BackgroundImage = null;
+                        button.Text = string.Empty;
+                    }
+                }
+            }
+        }
 
         private void NextTurn()
         {
@@ -46,7 +73,7 @@ namespace ChessGame
         }
         private void Button_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
+           Button button = sender as Button;
             Position position = (Position)button.Tag;
 
             if (selectedPiece == null)
@@ -86,37 +113,8 @@ namespace ChessGame
         {
             currentPlayer = (currentPlayer == PieceColor.White) ? PieceColor.Black : PieceColor.White;
         }
-        private void UpdateUI()
-        {
-            // Clear any highlights or error messages
-            ClearHighlights();
 
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    Button button = tableLayoutPanel1.GetControlFromPosition(j, i) as Button;
-                    Position position = new Position(j, i);
-                    Piece piece = board.GetPiece(position.X, position.Y);
-
-                    if (piece != null)
-                    {
-                        // Set the button image to display the piece
-                        button.BackgroundImage = GetChessPieceImage(piece);
-                        button.BackgroundImageLayout = ImageLayout.Center; // Change from Stretch to Center
-                        button.Text = string.Empty;
-                        button.FlatAppearance.BorderColor = Color.FromArgb(0, 255, 255, 255); // Add this line to remove the border
-                    }
-                    else
-                    {
-                        button.Image = null;
-                        button.Text = string.Empty;
-                    }
-                }
-            }
-        }
-
-        private Image GetChessPieceImage(Piece piece)
+        public Image GetChessPieceImage(Piece piece)
         {
             string pieceType = piece.GetType().Name;
             string imageName = pieceType + (piece.Color == PieceColor.White ? "_White" : "_Black");
@@ -202,7 +200,10 @@ namespace ChessGame
                     }
                 }
             }
+
         }
+
+       
     }
 }
 
