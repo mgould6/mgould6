@@ -1,0 +1,46 @@
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.Properties.Resources.resources
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.Resources.Resources.resources
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.csproj.GenerateResource.cache
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.csproj.CoreCompileInputs.cache
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\Chess.Core.dll
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\Chess.Core.pdb
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\System.Drawing.Common.dll
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\System.Drawing.Common.xml
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.csproj.CopyComplete
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.dll
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.pdb
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\Properties\Resources.resx
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\Properties\Resources.Designer.cs
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.abstractions.dll
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.assert.dll
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.core.dll
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.execution.desktop.dll
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.abstractions.xml
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.assert.xml
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.core.xml
+C:\Users\mjgou\source\repos\Chess.Core\bin\Debug\xunit.execution.desktop.xml
+C:\Users\mjgou\source\repos\Chess.Core\obj\Debug\Chess.Core.csproj.SuggestedBindingRedirects.cache
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\Properties\Resources.resx
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\Properties\Resources.Designer.cs
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\Chess.Core.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\Chess.Core.pdb
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\System.Drawing.Common.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.abstractions.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.assert.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.core.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.execution.desktop.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\System.Drawing.Common.xml
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.abstractions.xml
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.assert.xml
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.core.xml
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\bin\Debug\xunit.execution.desktop.xml
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.csproj.AssemblyReference.cache
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.csproj.SuggestedBindingRedirects.cache
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.Properties.Resources.resources
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.Resources.Resources.resources
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.csproj.GenerateResource.cache
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.csproj.CoreCompileInputs.cache
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.csproj.CopyComplete
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.dll
+C:\Users\mjgou\source\repos\Chess Project\Chess.Core\obj\Debug\Chess.Core.pdb
