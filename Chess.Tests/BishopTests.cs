@@ -1,4 +1,4 @@
-﻿using Chess;
+﻿using Chess.Core;
 using Xunit;
 
 namespace Chess.Tests

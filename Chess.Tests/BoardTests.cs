@@ -1,7 +1,7 @@
 ﻿using Chess;
 using Xunit;
 
-namespace Chess.Tests
+namespace Chess.Core
 {
     public class BoardTests
     {

@@ -1,10 +1,12 @@
-﻿using Chess;
+﻿using Chess.Core;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Chess;
 
-namespace ChessGame
+namespace Chess.Core
 {
+
     public partial class ChessGame : Form
     {
         private const int BOARD_SIZE = 8;
@@ -18,6 +20,7 @@ namespace ChessGame
         private Board board;
         private PieceColor currentPlayer;
         private Piece selectedPiece;
+        private TableLayoutPanel tableLayoutPanel1;
         private Position selectedPiecePosition;
 
 
@@ -30,7 +33,6 @@ namespace ChessGame
             UpdateUI(); 
         }
 
-
         private void InitializeGameState()
         {
             board = new Board();
@@ -40,6 +42,7 @@ namespace ChessGame
             selectedPiecePosition = null;
             UpdateUI();
         }
+
         private void UpdateUI()
         {
             for (int i = 0; i < 8; i++)
@@ -70,11 +73,11 @@ namespace ChessGame
             }
         }
 
-
         private void NextTurn()
         {
             currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
         }
+
         private void ClearSelection()
         {
             if (selectedPiecePosition != null)
@@ -134,9 +137,8 @@ namespace ChessGame
             string pieceType = piece.GetType().Name;
             string imageName = pieceType + (piece.Color == PieceColor.White ? "_White" : "_Black");
 
-            return (Image)Chess.Properties.Resources.ResourceManager.GetObject(imageName);
+            return (Image)Chess.Core.Properties.Resources.ResourceManager.GetObject(imageName);
         }
-
 
         private void ClearHighlights()
         {
@@ -218,7 +220,53 @@ namespace ChessGame
 
         }
 
-       
+        private void InitializeComponent()
+        {
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.SuspendLayout();
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.ColumnCount = 8;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 761);
+            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // ChessGame
+            // 
+            this.ClientSize = new System.Drawing.Size(784, 761);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Name = "ChessGame";
+            this.Load += new System.EventHandler(this.ChessGame_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void ChessGame_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

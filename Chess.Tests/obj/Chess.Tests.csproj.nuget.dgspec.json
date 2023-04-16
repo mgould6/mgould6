@@ -4,6 +4,21 @@
     "C:\\Users\\mjgou\\source\\repos\\Chess.Tests\\Chess.Tests.csproj": {}
   },
   "projects": {
+    "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj",
+        "projectName": "Chess.Core",
+        "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
     "C:\\Users\\mjgou\\source\\repos\\Chess.Tests\\Chess.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -33,6 +48,9 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
+              "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj": {
+                "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj"
+              },
               "C:\\Users\\mjgou\\source\\repos\\Chess\\Chess.csproj": {
                 "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess\\Chess.csproj"
               }
@@ -97,7 +115,11 @@
         "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess\\Chess.csproj",
         "frameworks": {
           "net48": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj": {
+                "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj"
+              }
+            }
           }
         }
       },

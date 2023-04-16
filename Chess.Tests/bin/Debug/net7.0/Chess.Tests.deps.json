@@ -9,6 +9,7 @@
       "Chess.Tests/1.0.0": {
         "dependencies": {
           "Chess": "1.0.0",
+          "Chess.Core": "1.0.0",
           "Microsoft.NET.Test.Sdk": "17.3.2",
           "coverlet.collector": "3.1.2",
           "xunit": "2.4.2",
@@ -1091,8 +1092,16 @@
       },
       "xunit.runner.visualstudio/2.4.5": {},
       "Chess/1.0.0": {
+        "dependencies": {
+          "Chess.Core": "1.0.0"
+        },
         "runtime": {
           "Chess.exe": {}
+        }
+      },
+      "Chess.Core/1.0.0": {
+        "runtime": {
+          "Chess.Core.dll": {}
         }
       }
     }
@@ -1748,6 +1757,11 @@
       "hashPath": "xunit.runner.visualstudio.2.4.5.nupkg.sha512"
     },
     "Chess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chess.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -8,9 +8,10 @@ C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\testhost.exe
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\xunit.runner.reporters.netcoreapp10.dll
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\xunit.runner.utility.netcoreapp10.dll
+C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Properties\Resources.resx
+C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Properties\Resources.Designer.cs
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\ChessGame.resx
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\ChessGame.cs
-C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\ChessGame.Designer.cs
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.Tests.deps.json
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.Tests.runtimeconfig.json
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.Tests.dll
@@ -94,7 +95,9 @@ C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\zh-Hans\Microsoft.Visua
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.Core.dll
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.exe
+C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.Core.pdb
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.pdb
 C:\Users\mjgou\source\repos\Chess.Tests\bin\Debug\net7.0\Chess.exe.config
 C:\Users\mjgou\source\repos\Chess.Tests\obj\Debug\net7.0\Chess.Tests.csproj.CopyComplete

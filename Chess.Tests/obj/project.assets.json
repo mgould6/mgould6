@@ -1811,11 +1811,23 @@
       },
       "Chess/1.0.0": {
         "type": "project",
+        "dependencies": {
+          "Chess.Core": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Chess.dll": {}
         },
         "runtime": {
           "bin/placeholder/Chess.dll": {}
+        }
+      },
+      "Chess.Core/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/Chess.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Core.dll": {}
         }
       }
     }
@@ -6117,11 +6129,17 @@
       "type": "project",
       "path": "../Chess/Chess.csproj",
       "msbuildProject": "../Chess/Chess.csproj"
+    },
+    "Chess.Core/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Core/Chess.Core.csproj",
+      "msbuildProject": "../Chess.Core/Chess.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Chess >= 1.0.0",
+      "Chess.Core >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.3.2",
       "coverlet.collector >= 3.1.2",
       "xunit >= 2.4.2",
@@ -6161,6 +6179,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj": {
+              "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess.Core\\Chess.Core.csproj"
+            },
             "C:\\Users\\mjgou\\source\\repos\\Chess\\Chess.csproj": {
               "projectPath": "C:\\Users\\mjgou\\source\\repos\\Chess\\Chess.csproj"
             }
