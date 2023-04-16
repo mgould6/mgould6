@@ -32,7 +32,62 @@ namespace Chess.Core
             InitializeGameState();
             UpdateUI(); 
         }
+        private void InitializeComponent()
+        {
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.SuspendLayout();
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tableLayoutPanel1.ColumnCount = 8;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(800, 800);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 800);
+            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // ChessGame
+            // 
+            this.ClientSize = new System.Drawing.Size(800, 800);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(816, 839);
+            this.Name = "ChessGame";
+            this.Load += new System.EventHandler(this.ChessGame_Load);
+            this.ResumeLayout(false);
 
+        }
+        public void Initialize()
+        {
+
+
+            // Set padding of table layout panel to zero
+            tableLayoutPanel1.Padding = new Padding(0);
+
+            // Draw chess board
+            DrawChessBoard();
+
+        }
         private void InitializeGameState()
         {
             board = new Board();
@@ -42,7 +97,6 @@ namespace Chess.Core
             selectedPiecePosition = null;
             UpdateUI();
         }
-
         private void UpdateUI()
         {
             for (int i = 0; i < 8; i++)
@@ -72,22 +126,6 @@ namespace Chess.Core
                 }
             }
         }
-
-        private void NextTurn()
-        {
-            currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
-        }
-
-        private void ClearSelection()
-        {
-            if (selectedPiecePosition != null)
-            {
-                tableLayoutPanel1.GetControlFromPosition(selectedPiecePosition.X, selectedPiecePosition.Y).BackColor = defaultButtonColor;
-            }
-            selectedPiece = null;
-            selectedPiecePosition = null;
-        }
-
         private void Button_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -126,12 +164,19 @@ namespace Chess.Core
                 UpdateUI(); // Refresh the UI
             }
         }
-
+        private void ClearSelection()
+        {
+            if (selectedPiecePosition != null)
+            {
+                tableLayoutPanel1.GetControlFromPosition(selectedPiecePosition.X, selectedPiecePosition.Y).BackColor = defaultButtonColor;
+            }
+            selectedPiece = null;
+            selectedPiecePosition = null;
+        }
         private void SwitchPlayer()
         {
             currentPlayer = (currentPlayer == PieceColor.White) ? PieceColor.Black : PieceColor.White;
         }
-
         public Image GetChessPieceImage(Piece piece)
         {
             string pieceType = piece.GetType().Name;
@@ -139,7 +184,6 @@ namespace Chess.Core
 
             return (Image)Chess.Core.Properties.Resources.ResourceManager.GetObject(imageName);
         }
-
         private void ClearHighlights()
         {
             for (int i = 0; i < 8; i++)
@@ -151,19 +195,6 @@ namespace Chess.Core
                 }
             }
         }
-
-        public void Initialize()
-        {
-            
-
-            // Set padding of table layout panel to zero
-            tableLayoutPanel1.Padding = new Padding(0);
-
-            // Draw chess board
-            DrawChessBoard();
-
-        }
-
         private void DrawChessBoard()
         {
             if (tableLayoutPanel1.RowCount != BOARD_SIZE || tableLayoutPanel1.ColumnCount != BOARD_SIZE)
@@ -195,6 +226,7 @@ namespace Chess.Core
 
                     }
                     button.BackgroundImageLayout = ImageLayout.Center; // Add this line to center the images
+                    button.Dock = DockStyle.Fill; // Add this line to fill the button within the cell
 
                     tableLayoutPanel1.Controls.Add(button, col, row);
                 }
@@ -219,54 +251,15 @@ namespace Chess.Core
             }
 
         }
-
-        private void InitializeComponent()
-        {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 8;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 8;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 761);
-            this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
-            // 
-            // ChessGame
-            // 
-            this.ClientSize = new System.Drawing.Size(784, 761);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "ChessGame";
-            this.Load += new System.EventHandler(this.ChessGame_Load);
-            this.ResumeLayout(false);
-
-        }
-
         private void ChessGame_Load(object sender, EventArgs e)
         {
 
         }
+        private void NextTurn()
+        {
+            currentPlayerColor = currentPlayerColor == PieceColor.White ? PieceColor.Black : PieceColor.White;
+        }
+
     }
 }
 

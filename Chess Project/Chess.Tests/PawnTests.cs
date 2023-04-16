@@ -10,9 +10,13 @@ namespace Chess.Tests
         {
             // Arrange
             var board = new Board();
+            board.InitializeBoard(); // Initialize the board
             var pawn = new Pawn(PieceColor.White);
-            var from = new Position(1, 2); // Assuming 0-based indexing
-            var to = new Position(1, 4);
+            var from = new Position(1, 1); // Assuming 0-based indexing, initial pawn position
+            var to = new Position(1, 3);
+
+            // Set the pawn on the board
+            board.SetPiece(from.X, from.Y, pawn);
 
             // Act
             bool isValidMove = pawn.IsValidMove(from, to, board);
